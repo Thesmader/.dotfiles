@@ -144,3 +144,5 @@ export PATH="$PATH:/home/thesmader/.android/sdk/emulator"
 export PATH="$PATH:$HOME/scripts"
 export ANDROID_SDK_ROOT="/home/thesmader/.android/sdk"
 export ANDROID_HOME="/home/thesmader/.android/sdk"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
