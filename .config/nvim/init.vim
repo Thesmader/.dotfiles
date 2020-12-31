@@ -1,36 +1,79 @@
 call plug#begin()
 
+Plug 'ThePrimeagen/vim-be-good', {'do' : './install.sh'}
+Plug 'dstein64/vim-startuptime'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'dense-analysis/ale'
+Plug 'thosakwe/vim-flutter'
 Plug 'neoclide/coc.nvim', {'branch':'release'}
+Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-surround'
 " Color schemes
-Plug 'gruvbox-community/gruvbox'
 Plug 'ntk148v/vim-horizon'
 Plug 'itchyny/lightline.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
-Plug 'mbbill/undotree'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'vim-test/vim-test'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
+Plug 'jiangmiao/auto-pairs'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'Neevash/awesome-flutter-snippets'
+Plug 'RobertBrunhage/flutter-riverpod-snippets'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'ayu-theme/ayu-vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
+" vim-test
+let test#strategy = "neovim"
+if has('nvim')
+    tmap <C-o> <C-\><C-n>
+endif
+
+" Enable Flutter menu
+" call FlutterMenu()
+
+" vim-flutter
+" nnoremap <leader>fr :FlutterRun<cr>
+" nnoremap <leader>fs :FlutterHotReload<cr>
+" nnoremap <leader>fr :FlutterRun<cr>
+" nnoremap <leader>fr :FlutterRun<cr>
+" nnoremap <leader>fr :FlutterRun<cr>
+
+" Remove trailing whitespaces in specified filetypes
+autocmd FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
+syntax on
+filetype plugin indent on
+
+" NerdCommenter
+let g:NERDCreateDefaultMappings = 1
+let g:NERDSpaceDelims = 1
+
+
 " ColorScheme Configuration
-colorscheme gruvbox
-let gruvbox_contrast_dark = 'hard'
-let gruvbox_invert_selection = '0'
+colorscheme ayu
+if exists('+termguicolors')
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+" let gruvbox_contrast_dark = 'hard'
+" let gruvbox_invert_selection = '0'
 " Colors may not be correct if this is not set
 set termguicolors
+let ayucolor="dark"
 
 " lightline
 let g:lightline = {
-	\ 'colorscheme': 'horizon',
+	\ 'colorscheme': 'ayu',
 	\ }
 
 
@@ -49,15 +92,38 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set colorcolumn=80
-"highlight ColorColumn ctermbg=0 guibg=lightgrey
 set number
 set relativenumber
 set cursorline
+set splitbelow
+set splitright
 
+" Dart Vim Plugin
+let g:dart_style_guide = 2
+let g:dart_format_on_save = 1
+" let g:dartfmt_options = 
 
 " Nvim LSP
-lua <<EOF
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+" Diagnostics
+:lua << EOF
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- Enable diagnostic message updates in insert mode
+    update_in_insert = true,
+  }
+)
+EOF
+
+:lua <<EOF
+local nvim_lsp = require('lspconfig')
 local dart_capabilities = vim.lsp.protocol.make_client_capabilities()
+local servers = {'dartls', 'tsserver'}
+for _, lsp in ipairs(servers) do
+    nvim_lsp.dartls.setup{}
+end
 dart_capabilities.textDocument.codeAction = {
     codeActionLiteralSupport = {
         codeActionKind = {
@@ -74,8 +140,9 @@ dart_capabilities.textDocument.codeAction = {
         };
     };
 }
-require'lspconfig'.dartls.setup{
-    on_attach = dart_attach;
+nvim_lsp.dartls.setup{
+--    on_attach = dart_attach;
+    on_attach = require'completion'.on_attach;
     init_options = {
         onlyAnalyzeProjectsWithOpenFiles = true,
         suggestFromUnimportedLibraries = true,
@@ -85,23 +152,13 @@ require'lspconfig'.dartls.setup{
 }
 EOF
 
-set completeopt=menuone,noinsert,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'lspconfig'.dartls.setup{on_attach=require'completion'.on_attach}
-"lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+" lua require'lspconfig'.dartls.setup{on_attach=require'completion'.on_attach}
+lua require('lspconfig').tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.sumneko_lua.setup{}
 
 " TreeSitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = "dart",
-    highlight = {
-        enable = true,
-    },
-}
-EOF
+lua require'nvim-treesitter.configs'.setup {highlight = { enable = true }}
 
-syntax on
-filetype plugin indent on
 
 function! WinMove(key)
     let t:curwin = winnr()
@@ -130,7 +187,18 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 "nmap <silent> <C-p>
 
 " FZF
-nnoremap <silent> <C-p> :FZF<cr>
+nnoremap <silent> <C-p> :GFiles<cr>
+
+" Snippets
+imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Completion
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -150,7 +218,7 @@ nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <leader>vsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -183,6 +251,7 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 " Rename symbol
 nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K : call <SID>show_documentation()<CR>
