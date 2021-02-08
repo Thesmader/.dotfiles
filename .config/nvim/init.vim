@@ -1,14 +1,19 @@
 call plug#begin()
 
-Plug 'ThePrimeagen/vim-be-good', {'do' : './install.sh'}
-Plug 'dstein64/vim-startuptime'
+Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
+Plug 'mattn/webapi-vim'
+Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'vim-scripts/DrawIt.vim'
+Plug 'tjdevries/nlua.nvim'
+" Plug 'kdheepak/lazygit.nvim'
+Plug 'euclidianAce/BetterLua.vim'
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'neomake/neomake'
 Plug 'thosakwe/vim-flutter'
 Plug 'neoclide/coc.nvim', {'branch':'release'}
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
-" Color schemes
-Plug 'ntk148v/vim-horizon'
+Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/fzf.vim'
@@ -26,7 +31,6 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'Neevash/awesome-flutter-snippets'
 Plug 'RobertBrunhage/flutter-riverpod-snippets'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'ayu-theme/ayu-vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -39,18 +43,9 @@ if has('nvim')
     tmap <C-o> <C-\><C-n>
 endif
 
-" Enable Flutter menu
-" call FlutterMenu()
-
-" vim-flutter
-" nnoremap <leader>fr :FlutterRun<cr>
-" nnoremap <leader>fs :FlutterHotReload<cr>
-" nnoremap <leader>fr :FlutterRun<cr>
-" nnoremap <leader>fr :FlutterRun<cr>
-" nnoremap <leader>fr :FlutterRun<cr>
-
 " Remove trailing whitespaces in specified filetypes
 autocmd FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
+" autocmd! FileType dart autocmd BufWritePost,BufEnter Neomake! lint<CR>
 syntax on
 filetype plugin indent on
 
@@ -58,31 +53,37 @@ filetype plugin indent on
 let g:NERDCreateDefaultMappings = 1
 let g:NERDSpaceDelims = 1
 
+" Auto-Pairs
+" let g:AutoPairsMapCR = 1
+" inoremap <expr> <buffer> <silent> <CR> AutoPairsReturn()
+let g:completion_confirm_key = ""
+inoremap <expr> <cr> pumvisible() ? "\<Plug>(completion_confirm_completion)" : "\<cr>"
 
 " ColorScheme Configuration
-colorscheme ayu
+colorscheme gruvbox
 if exists('+termguicolors')
         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
         let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-" let gruvbox_contrast_dark = 'hard'
-" let gruvbox_invert_selection = '0'
+let gruvbox_contrast_dark = 'hard'
+let gruvbox_invert_selection = '0'
 " Colors may not be correct if this is not set
 set termguicolors
 let ayucolor="dark"
+hi Normal guibg=NONE ctermbg=NONE
 
 " lightline
 let g:lightline = {
-	\ 'colorscheme': 'ayu',
+	\ 'colorscheme': 'gruvbox',
 	\ }
-
 
 " Sets
 set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set nohlsearch
+set softtabstop=2
+set shiftwidth=2
 set expandtab
-set smartindent
+set autoindent
 set nu
 set nowrap
 set smartcase
@@ -97,6 +98,7 @@ set relativenumber
 set cursorline
 set splitbelow
 set splitright
+set scrolloff=8
 
 " Dart Vim Plugin
 let g:dart_style_guide = 2
@@ -106,6 +108,14 @@ let g:dart_format_on_save = 1
 " Nvim LSP
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+" let g:neomake_dart_lint_maker = {
+  " \ 'exe': 'flutter',
+  " \ 'args': ['analyze', 'getCwd()'],
+  " \ 'errorformat': '%f:%l:%c:%n: %m', }
+" let g:neomake_dart_enabled_makers = ['lint']
+
+" Telescope
+:lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter, prompt_position="top", sorting_strategy="ascending"}})
 
 " Diagnostics
 :lua << EOF
@@ -119,11 +129,12 @@ EOF
 
 :lua <<EOF
 local nvim_lsp = require('lspconfig')
+-- local flutter = require('flutter-tools')
 local dart_capabilities = vim.lsp.protocol.make_client_capabilities()
 local servers = {'dartls', 'tsserver'}
-for _, lsp in ipairs(servers) do
-    nvim_lsp.dartls.setup{}
-end
+-- for _, lsp in ipairs(servers) do
+--  nvim_lsp[lsp].setup{}
+--end
 dart_capabilities.textDocument.codeAction = {
     codeActionLiteralSupport = {
         codeActionKind = {
@@ -140,21 +151,28 @@ dart_capabilities.textDocument.codeAction = {
         };
     };
 }
+-- flutter.setup_lsp{
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
 nvim_lsp.dartls.setup{
 --    on_attach = dart_attach;
     on_attach = require'completion'.on_attach;
+    flags = {allow_incremental_sync = true},
     init_options = {
-        onlyAnalyzeProjectsWithOpenFiles = true,
-        suggestFromUnimportedLibraries = true,
-        closingLabels = true,
-    };
-    capabilities = dart_capabilities;
+      onlyAnalyzeProjectsWithOpenFiles = true,
+      outline = true,
+      flutterOutline = true,
+      suggestFromUnimportedLibraries = true,
+      closingLabels = true,
+    },
+--     handlers = {
+--       ['dart/textDocument/publishClosingLabels'] = flutter.closing_tags,
+--       ['dart/textDocument/publishOutline'] = flutter.outline
+--     },
+    capabilities = dart_capabilities;  
 }
 EOF
-
-" lua require'lspconfig'.dartls.setup{on_attach=require'completion'.on_attach}
-lua require('lspconfig').tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.sumneko_lua.setup{}
 
 " TreeSitter
 lua require'nvim-treesitter.configs'.setup {highlight = { enable = true }}
@@ -182,12 +200,14 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 " KeyBindings
-xmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+" xmap <leader>a <Plug>(coc-codeaction-selected)
+" nmap <leader>a <Plug>(coc-codeaction-selected)
 "nmap <silent> <C-p>
 
 " FZF
-nnoremap <silent> <C-p> :GFiles<cr>
+" nnoremap <silent> <C-p> :GFiles<cr>
+
+nnoremap <silent> <C-p> :lua require('telescope.builtin').git_files()<CR>
 
 " Snippets
 imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -199,6 +219,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>vca :lua require('telescope.builtin').lsp_code_actions()<CR>
 
 " Completion
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -217,14 +238,14 @@ nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+" nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 
 " Debugger remaps
 nnoremap <leader>m :MaximizerToggle!<CR>

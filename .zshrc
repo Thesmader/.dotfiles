@@ -27,6 +27,7 @@ fi
 
 
 # Custom PATHs  
+export PATH="$PATH:$HOME/neovim/bin"
 export PATH="$PATH:$HOME/dev/env/flutter/bin/"
 export PATH="$PATH:$HOME/fvm/default/bin/"
 export PATH="$PATH:$HOME/dev/env/flutter/bin/cache/dart-sdk/bin/"
@@ -37,8 +38,10 @@ export PATH="$PATH:$HOME/.android/sdk/emulator"
 export PATH="$PATH:$HOME/Installs/android-studio/bin/studio.sh"
 export PATH="$PATH:$HOME/scripts"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/gems"
+export PATH="$PATH:$HOME/.emacs.d/bin"
 export ANDROID_SDK_ROOT="$HOME/.android/sdk"
 export ANDROID_HOME="$HOME/.android/sdk"
+export FLUTTER_ROOT="/home/thesmader/dev/env/flutter/"
 export CHROME_EXECUTABLE="/usr/bin/chromium"
 
 # Custom Aliases
@@ -51,6 +54,10 @@ alias fl="fvm flutter"
 alias q="exit"
 alias c="clear"
 alias invim="nvim $HOME/.config/nvim/init.vim"
+alias pbld="flutter pub run build_runner build --delete-conflicting-outputs"
+alias pubg="flutter pub get"
+alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
+alias pnvim="nvim --cmd "set rtp+=$(pwd)" ."
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -229,7 +236,7 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+   export EDITOR='nvim'
 # fi
 
 # Compilation flags
