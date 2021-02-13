@@ -18,7 +18,7 @@
 # check the local terminfo database and use `alacritty` if it is
 # available, otherwise `xterm-256color` is used.
 #TERM: alacritty
-#window:
+window:
 # Window dimensions (changes require restart)
 #
 # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -38,9 +38,9 @@
 #
 # Blank space added around the window in pixels. This padding is scaled
 # by DPI and the specified value is always added at both opposing sides.
-#padding:
-#  x: 0
-#  y: 0
+  padding:
+    x: 4
+    y: 4
 # Spread additional padding evenly around the terminal content.
 #dynamic_padding: false
 # Window decorations
@@ -81,97 +81,121 @@
 #scrolling:
 # Maximum number of lines in the scrollback buffer.
 # Specifying '0' will disable scrolling.
-#history: 10000
+history: 5000
 # Scrolling distance multiplier.
 #multiplier: 3
 # Font configuration
-#font:
+font:
 # Normal (roman) font face
-normal:
-# Font family
-#
-# Default:
-#   - (macOS) Menlo
-#   - (Linux/BSD) monospace
-#   - (Windows) Consolas
-family: "Ligconsolata"
-# The `style` can be specified to pick a specific face.
-#style: Regular
-# Bold font face
-bold:
-# Font family
-#
-# If the bold family is not specified, it will fall back to the
-# value specified for the normal font.
-family: "Ligconosolata"
-# The `style` can be specified to pick a specific face.
-#style: Bold
-# Italic font face
-italic:
-# Font family
-#
-# If the italic family is not specified, it will fall back to the
-# value specified for the normal font.
-family: "Ligconsolata"
-# The `style` can be specified to pick a specific face.
-#style: Italic
-# Bold italic font face
-bold_italic:
-# Font family
-#
-# If the bold italic family is not specified, it will fall back to the
-# value specified for the normal font.
-family: "Ligconsolata"
-# The `style` can be specified to pick a specific face.
-#style: Bold Italic
-# Point size
-#size: 11.0
-# Offset is the extra space around each character. `offset.y` can be thought of
-# as modifying the line spacing, and `offset.x` as modifying the letter spacing.
-#offset:
-#  x: 0
-#  y: 0
-# Glyph offset determines the locations of the glyphs within their cells with
-# the default being at the bottom. Increasing `x` moves the glyph to the right,
-# increasing `y` moves the glyph upward.
-#glyph_offset:
-#  x: 0
-#  y: 0
-# Thin stroke font rendering (macOS only)
-#
-# Thin strokes are suitable for retina displays, but for non-retina screens
-# it is recommended to set `use_thin_strokes` to `false`.
-#use_thin_strokes: true
-# If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
-# Colors (Dracula)
-colors:
-  # Default colors
-  primary:
-    background: '#020302'
-    foreground: '#f8f8f2'
-
-  # Normal colors
   normal:
-    black: '#000000'
-    red: '#ff5555'
-    green: '#50fa7b'
-    yellow: '#f1fa8c'
-    blue: '#caa9fa'
-    magenta: '#ff79c6'
-    cyan: '#8be9fd'
-    white: '#bfbfbf'
+  # Font family
+  #
+  # Default:
+  #   - (macOS) Menlo
+  #   - (Linux/BSD) monospace
+  #   - (Windows) Consolas
+    family: JetBrains Mono
+  # The `style` can be specified to pick a specific face.
+    style: Regular
+  # Bold font face
+  bold:
+  # Font family
+  #
+  # If the bold family is not specified, it will fall back to the
+  # value specified for the normal font.
+    family: JetBrains Mono
+  # The `style` can be specified to pick a specific face.
+    style: Bold
+  # Italic font face
+  italic:
+  # Font family
+  #
+  # If the italic family is not specified, it will fall back to the
+  # value specified for the normal font.
+    family: JetBrains Mono
+  # The `style` can be specified to pick a specific face.
+    style: Italic
+  # Bold italic font face
+  bold_italic:
+  # Font family
+  #
+  # If the bold italic family is not specified, it will fall back to the
+  # value specified for the normal font.
+    family: JetBrains Mono
+  # The `style` can be specified to pick a specific face.
+    style: Bold Italic
+  # Point size
+  #size: 11.0
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  #offset:
+  #  x: 0
+  #  y: 0
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the right,
+  # increasing `y` moves the glyph upward.
+  #glyph_offset:
+  #  x: 0
+  #  y: 0
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`.
+  #use_thin_strokes: true
+  # If `true`, bold text is drawn using the bright color variants.
+  #draw_bold_text_with_bright_colors: false
+  # Colors (Dracula)
+# colors:
+  # # Default colors
+  # primary:
+    # background: '#020302'
+    # foreground: '#f8f8f2'
 
-  # Bright colors
+  # # Normal colors
+  # normal:
+    # black: '#000000'
+    # red: '#ff5555'
+    # green: '#50fa7b'
+    # yellow: '#f1fa8c'
+    # blue: '#caa9fa'
+    # magenta: '#ff79c6'
+    # cyan: '#8be9fd'
+    # white: '#bfbfbf'
+
+  # # Bright colors
+  # bright:
+    # black: '#575b70'
+    # red: '#ff6e67'
+    # green: '#5af78e'
+    # yellow: '#f4f99d'
+    # blue: '#caa9fa'
+    # magenta: '#ff92d0'
+    # cyan: '#9aedfe'
+    # white: '#e6e6e6'
+colors:
+  primary:
+    background: '0x282828'
+    foreground: '0xdfbf8e'
+
+  normal:
+    black:   '0x665c54'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe78a4e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
+
   bright:
-    black: '#575b70'
-    red: '#ff6e67'
-    green: '#5af78e'
-    yellow: '#f4f99d'
-    blue: '#caa9fa'
-    magenta: '#ff92d0'
-    cyan: '#9aedfe'
-    white: '#e6e6e6'
+    black:   '0x928374'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe3a84e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
 # Background opacity
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
@@ -183,14 +207,14 @@ background_opacity: 0.55
 #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 # When set to `true`, selected text will be copied to the primary clipboard.
 #save_to_clipboard: false
-#cursor:
+cursor:
 # Cursor style
 #
 # Values for `style`:
 #   - ▇ Block
 #   - _ Underline
 #   - | Beam
-#style: Block
+  style: Block
 # Vi mode cursor style
 #
 # If the vi mode cursor style is `None` or not specified, it will fall back to
@@ -205,7 +229,7 @@ background_opacity: 0.55
 # from `0.0` to `1.0`.
 #thickness: 0.15
 # Live config reload (changes require restart)
-#live_config_reload: true
+live_config_reload: true
 # Shell
 #
 # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
@@ -470,7 +494,7 @@ background_opacity: 0.55
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
 #- { key: Paste,                                action: Paste          }
 #- { key: Copy,                                 action: Copy           }
 #- { key: L,         mods: Control,             action: ClearLogNotice }
@@ -481,7 +505,7 @@ background_opacity: 0.55
 #- { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom }
 # Vi Mode
 #- { key: Space,  mods: Shift|Control, mode: Vi, action: ScrollToBottom          }
-#- { key: Space,  mods: Shift|Control,           action: ToggleViMode            }
+  - { key: Space,  mods: Control,           action: ToggleViMode            }
 #- { key: Escape,                      mode: Vi, action: ClearSelection          }
 #- { key: I,                           mode: Vi, action: ScrollToBottom          }
 #- { key: I,                           mode: Vi, action: ToggleViMode            }

@@ -58,6 +58,7 @@ alias pbld="flutter pub run build_runner build --delete-conflicting-outputs"
 alias pubg="flutter pub get"
 alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
 alias pnvim="nvim --cmd "set rtp+=$(pwd)" ."
+alias dsa="cd $HOME/dev/dsa"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
