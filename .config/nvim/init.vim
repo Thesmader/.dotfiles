@@ -1,12 +1,15 @@
 set exrc
+set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
+Plug 'AndrewRadev/switch.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'ThePrimeagen/vim-be-good'
 Plug 'tpope/vim-dispatch'
 Plug 'wakatime/vim-wakatime'
 Plug 'mattn/webapi-vim'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'vim-scripts/DrawIt'
-Plug 'kdheepak/lazygit.nvim'
 Plug 'euclidianAce/BetterLua.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
@@ -41,6 +44,9 @@ autocmd FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
 " autocmd! FileType dart autocmd BufWritePost,BufEnter Neomake! lint<CR>
 syntax on
 filetype plugin indent on
+
+let g:switch_mapping = ""
+nnoremap <leader>t :Switch<CR>
 
 " NerdCommenter
 let g:NERDCreateDefaultMappings = 1
@@ -77,11 +83,12 @@ function! WinMove(key)
     endif
 endfunction
 
+" Keymaps
+imap jk <Esc>
 nnoremap <silent> <C-h> :call WinMove('h')<CR>
 nnoremap <silent> <C-j> :call WinMove('j')<CR>
 nnoremap <silent> <C-k> :call WinMove('k')<CR>
 nnoremap <silent> <C-l> :call WinMove('l')<CR>
-
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
