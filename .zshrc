@@ -60,6 +60,8 @@ alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
 alias pnvim="nvim --cmd "set rtp+=$(pwd)" ."
 alias dsa="cd $HOME/dev/dsa"
 alias lf="lf-ueberzug"
+# alias screenkey="screenkey -p fixed -g 50%x10%+20%-5% & disown %1"
+alias screenkey="screenkey & disown %1"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
