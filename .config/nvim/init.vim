@@ -13,7 +13,7 @@ Plug 'vim-scripts/DrawIt'
 Plug 'euclidianAce/BetterLua.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
-Plug 'neoclide/coc.nvim', {'branch':'release'}
+" Plug 'neoclide/coc.nvim', {'branch':'release'}
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'gruvbox-community/gruvbox'
@@ -24,7 +24,9 @@ Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'neovim/nvim-lspconfig'
+Plug 'anott03/nvim-lspinstall'
 Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'vim-test/vim-test'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
@@ -37,8 +39,10 @@ Plug 'RobertBrunhage/flutter-riverpod-snippets'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'sonph/onehalf', { 'rtp' : 'vim' }
 call plug#end()
 
+let g:custom_path = '~/.config/nvim/plugin/'
 " Remove trailing whitespaces in specified filetypes
 autocmd FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
 " autocmd! FileType dart autocmd BufWritePost,BufEnter Neomake! lint<CR>

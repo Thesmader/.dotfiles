@@ -1,6 +1,7 @@
 set noerrorbells
 set nohlsearch
 set softtabstop=2
+" set ts=2
 set shiftwidth=2
 set expandtab
 set autoindent
@@ -21,4 +22,6 @@ set splitright
 set scrolloff=8
 set secure
 set termguicolors
-set completeopt=menuone,noinsert,noselect
+" set completeopt=menuone,noinsert,noselect
+set list
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:↲,precedes:«,extends:»

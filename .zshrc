@@ -42,7 +42,7 @@ export PATH="$PATH:$HOME/.emacs.d/bin"
 export ANDROID_SDK_ROOT="$HOME/.android/sdk"
 export ANDROID_HOME="$HOME/.android/sdk"
 export FLUTTER_ROOT="/home/thesmader/dev/env/flutter/"
-export CHROME_EXECUTABLE="/usr/bin/chromium"
+export CHROME_EXECUTABLE="/usr/bin/brave"
 
 # Custom Aliases
 alias gst="git status" 
@@ -263,3 +263,7 @@ alias config='/usr/bin/git --git-dir=/home/thesmader/dotfiles/ --work-tree=/home
 
 bindkey -v
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
