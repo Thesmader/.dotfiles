@@ -142,6 +142,7 @@ export PATH="$PATH:/home/thesmader/.android/sdk/cmdline-tools/tools/bin"
 export PATH="$PATH:/home/thesmader/.android/sdk/platform-tools"
 export PATH="$PATH:/home/thesmader/.android/sdk/emulator"
 export PATH="$PATH:$HOME/scripts"
+export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export ANDROID_SDK_ROOT="/home/thesmader/.android/sdk"
 export ANDROID_HOME="/home/thesmader/.android/sdk"
 
@@ -150,3 +151,6 @@ export ANDROID_HOME="/home/thesmader/.android/sdk"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

@@ -57,11 +57,12 @@ alias invim="nvim $HOME/.config/nvim/init.vim"
 alias pbld="flutter pub run build_runner build --delete-conflicting-outputs"
 alias pubg="flutter pub get"
 alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
-alias pnvim="nvim --cmd "set rtp+=$(pwd)" ."
+alias pnvim='nvim --cmd "set rtp+=$(pwd)" .'
 alias dsa="cd $HOME/dev/dsa"
 alias lf="lf-ueberzug"
 # alias screenkey="screenkey -p fixed -g 50%x10%+20%-5% & disown %1"
 alias screenkey="screenkey & disown %1"
+alias nvimcfg="cd $HOME/.config/nvim/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -267,3 +268,6 @@ bindkey -v
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

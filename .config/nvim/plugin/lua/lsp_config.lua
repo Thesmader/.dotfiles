@@ -20,7 +20,7 @@ local chain_complete_list = {
   comment = {},
 }
 
-local servers = {"bashls", "clangd", "tsserver"}
+local servers = {"bashls", "clangd", "tsserver", "vimls"}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
