@@ -2,7 +2,13 @@ set exrc
 set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
+" Plug 'mattn/emmet-vim'
+" Plug 'AndrewRadev/tagalong.vim'
+Plug 'florinpatrascu/vscode-elixir-snippets'
+Plug 'elixir-editors/vim-elixir'
 Plug '$HOME/dev/nvim_plugs/ghcli.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'sainnhe/gruvbox-material'
 Plug 'andweeb/presence.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'ThePrimeagen/vim-be-good'
@@ -45,6 +51,7 @@ let g:custom_path = '~/.config/nvim/plugin/'
 " Remove trailing whitespaces in specified filetypes
 autocmd FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
 " autocmd! FileType dart autocmd BufWritePost,BufEnter Neomake! lint<CR>
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
 syntax on
 filetype plugin indent on
 
@@ -61,15 +68,28 @@ if(has("termguicolors"))
   set termguicolors
 endif
 
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = 0
-colorscheme gruvbox
-hi Comment cterm=italic gui=italic
+" let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_invert_selection = 0
+set background=dark
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_invert_selection = 0
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_cursor = 'green'
+let g:gruvbox_material_diagnostic_line_highlight = 1
+" let g:gruvbox_material_diagnostic_text_highlight = 1
+let g:gruvbox_material_better_performance = 1
+colorscheme gruvbox-material
+" hi Comment cterm=italic gui=italic
 hi Normal guibg=NONE ctermbg=NONE
+
+"Colorizer
+:lua require'colorizer'.setup()
 
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -78,6 +98,13 @@ let g:lightline = {
       \   'gitbranch' : 'FugitiveHead'
       \ }
       \ }
+
+" Emmet
+  let g:user_emmet_install_global = 0
+  autocmd FileType html,css EmmetInstall
+  let g:user_emmet_leader_key=','
+" tagalong
+  let g:tagalong_verbose = 1
 
 function! WinMove(key)
   let t:curwin = winnr()

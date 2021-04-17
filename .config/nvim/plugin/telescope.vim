@@ -11,3 +11,4 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>vca :lua require('telescope.builtin').lsp_code_actions()<CR>
 nnoremap <leader>vrc :lua require('thesmader.telescope').search_nvim_config()<CR>
+nnoremap <leader>gc :lua require('thesmader.telescope').git_branches()<CR>
