@@ -54,10 +54,29 @@ lspconfig.elixirls.setup{
   on_attach = on_attach,
   settings = {
     elixirLS = {
+      dialyzerFormat = "dialyxir_long",
+      dialyzerWarnOpts = {"error_handling", "no_behaviours", "no_contracts", "no_fail_call", "no_fun_app", "no_improper_lists", "no_match", "no_missing_calls", "no_opaque", "no_return", "no_undefined_callbacks", "no_unused", "underspecs", "unknown", "unmatched_returns", "overspecs", "specdiffs"},
       dialyzerEnabled = true,
       suggestSpecs = true
     }
   }
+}
+
+-- CSS LSP
+local css_capabilities = vim.lsp.protocol.make_client_capabilities()
+css_capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.cssls.setup {
+  capabilities = css_capabilities,
+}
+
+-- HTML LSP
+--Enable (broadcasting) snippet capability for completion
+local html_capabilities = vim.lsp.protocol.make_client_capabilities()
+html_capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.html.setup {
+  capabilities = html_capabilities,
 }
 
 local chain_complete_list = {
@@ -73,7 +92,7 @@ local chain_complete_list = {
   comment = {},
 }
 
-local servers = {"bashls", "clangd", "tsserver", "vimls", "gopls"}
+local servers = {"bashls", "clangd", "tsserver", "vimls", "gopls", "cssls", "html"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup { on_attach = on_attach }
 end

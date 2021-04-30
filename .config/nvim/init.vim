@@ -2,9 +2,14 @@ set exrc
 set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
+
+Plug 'folke/lsp-trouble.nvim'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'glepnir/galaxyline.nvim'
 " Plug 'mattn/emmet-vim'
 " Plug 'AndrewRadev/tagalong.vim'
-Plug 'florinpatrascu/vscode-elixir-snippets'
+" Plug 'alvan/vim-closetag'
 Plug 'elixir-editors/vim-elixir'
 Plug '$HOME/dev/nvim_plugs/ghcli.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -16,14 +21,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'wakatime/vim-wakatime'
 Plug 'mattn/webapi-vim'
 Plug 'vim-scripts/AnsiEsc.vim'
-" Plug 'vim-scripts/DrawIt'
-" Plug 'euclidianAce/BetterLua.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'gruvbox-community/gruvbox'
-Plug 'itchyny/lightline.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'junegunn/fzf.vim'
@@ -44,68 +46,57 @@ Plug 'RobertBrunhage/flutter-riverpod-snippets'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'akinsho/nvim-toggleterm.lua'
 call plug#end()
 
+if(has("termguicolors"))
+  set termguicolors
+endif
+" Path to the plugin configuration files written in lua.
 let g:custom_path = '~/.config/nvim/plugin/'
+
 " Remove trailing whitespaces in specified filetypes
-autocmd FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
-" autocmd! FileType dart autocmd BufWritePost,BufEnter Neomake! lint<CR>
+au FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
+
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+
 syntax on
 filetype plugin indent on
+
+" LSP Trouble
+
+:lua << EOF
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
 
 let g:switch_mapping = ""
 nnoremap <leader>t :Switch<CR>
 
-" NerdCommenter
-let g:NERDCreateDefaultMappings = 1
-let g:NERDSpaceDelims = 1
+nmap <M-t> <C-w>+
+nmap <M-s> <C-w>-
 
-" ColorScheme Configuration
-" :lua require('colorbuddy').colorscheme('gruvbuddy')
-if(has("termguicolors"))
-  set termguicolors
-endif
-
-" let g:gruvbox_contrast_dark = 'hard'
-" let g:gruvbox_invert_selection = 0
-set background=dark
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_transparent_background = 1
-let g:gruvbox_material_invert_selection = 0
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_cursor = 'green'
-let g:gruvbox_material_diagnostic_line_highlight = 1
-" let g:gruvbox_material_diagnostic_text_highlight = 1
-let g:gruvbox_material_better_performance = 1
-colorscheme gruvbox-material
-" hi Comment cterm=italic gui=italic
-hi Normal guibg=NONE ctermbg=NONE
 
 "Colorizer
 :lua require'colorizer'.setup()
 
-" Lightline
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox_material',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch' : 'FugitiveHead'
-      \ }
-      \ }
+" Statusline
+:lua require('lualine').setup{ options = { theme = require'lualine.themes.gruvbox_material', section_separators = {'', ''}, component_separators = {'|', '|'} } }
 
-" Emmet
+" Web development stuff
+
+"Emmet
   let g:user_emmet_install_global = 0
   autocmd FileType html,css EmmetInstall
   let g:user_emmet_leader_key=','
 " tagalong
   let g:tagalong_verbose = 1
 
+" Easy splits with <C-dirn>
 function! WinMove(key)
   let t:curwin = winnr()
   exec "wincmd ".a:key
@@ -128,17 +119,6 @@ nnoremap <silent> <C-l> :call WinMove('l')<CR>
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
-" Use K to show documentation in preview window
-nnoremap <silent> K : call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if(index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
-
 function! OpenUrlUnderCursor()
   let s:uri = expand('<cWORD>')
   let s:uri = substitute(s:uri, '?', '\\?', '')
@@ -148,3 +128,6 @@ function! OpenUrlUnderCursor()
   endif
 endfunction
 nnoremap gx :call OpenUrlUnderCursor()<CR>
+
+
+
