@@ -2,14 +2,16 @@ set exrc
 set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
+Plug '$HOME/dev/nvim_plugs/oldfiles.vim'
 
+Plug 'ThePrimeagen/harpoon'
 Plug 'folke/lsp-trouble.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'glepnir/galaxyline.nvim'
-" Plug 'mattn/emmet-vim'
-" Plug 'AndrewRadev/tagalong.vim'
-" Plug 'alvan/vim-closetag'
+Plug 'mattn/emmet-vim'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'alvan/vim-closetag'
 Plug 'elixir-editors/vim-elixir'
 Plug '$HOME/dev/nvim_plugs/ghcli.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -87,15 +89,6 @@ nmap <M-s> <C-w>-
 " Statusline
 :lua require('lualine').setup{ options = { theme = require'lualine.themes.gruvbox_material', section_separators = {'', ''}, component_separators = {'|', '|'} } }
 
-" Web development stuff
-
-"Emmet
-  let g:user_emmet_install_global = 0
-  autocmd FileType html,css EmmetInstall
-  let g:user_emmet_leader_key=','
-" tagalong
-  let g:tagalong_verbose = 1
-
 " Easy splits with <C-dirn>
 function! WinMove(key)
   let t:curwin = winnr()
@@ -110,7 +103,7 @@ function! WinMove(key)
   endif
 endfunction
 
-" Keymaps
+" Keymaps for splitting and leader keys
 imap jk <Esc>
 nnoremap <silent> <C-h> :call WinMove('h')<CR>
 nnoremap <silent> <C-j> :call WinMove('j')<CR>
