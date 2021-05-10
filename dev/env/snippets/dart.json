@@ -87,5 +87,14 @@
       "",
       " });"
     ]
+  },
+  "Future Provider": {
+    "prefix": "fprovider",
+    "description": "Creates a future provider",
+    "body": [
+      "final $1 = FutureProvider<$2>((ref) async {",
+      "  return $4;",
+      "});"
+    ]
   }
 }

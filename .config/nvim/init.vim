@@ -3,8 +3,12 @@ set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
 Plug '$HOME/dev/nvim_plugs/oldfiles.vim'
+Plug '$HOME/dev/personal/ghcli'
 
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'folke/lsp-trouble.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -18,7 +22,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'sainnhe/gruvbox-material'
 Plug 'andweeb/presence.nvim'
 Plug 'vimwiki/vimwiki'
-Plug 'ThePrimeagen/vim-be-good'
 Plug 'tpope/vim-dispatch'
 Plug 'wakatime/vim-wakatime'
 Plug 'mattn/webapi-vim'
@@ -30,8 +33,8 @@ Plug 'tpope/vim-surround'
 Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+"Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'neovim/nvim-lspconfig'
