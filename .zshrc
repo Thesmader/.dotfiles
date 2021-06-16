@@ -26,38 +26,81 @@ export PATH="$PATH:$HOME/.android/sdk/cmdline-tools/tools/bin"
 export PATH="$PATH:$HOME/.android/sdk/platform-tools"
 export PATH="$PATH:$HOME/.android/sdk/emulator"
 export PATH="$PATH:$HOME/Installs/android-studio/bin/studio.sh"
+export PATH="$PATH:$HOME/.nvm/versions/node/v16.1.0/bin"
 export PATH="$PATH:$HOME/scripts"
+export PATH="$PATH:$HOME/Installs/fuchsia/.jiri_root/bin"
+export PATH="$PATH:$HOME/Installs/android-studio/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/gems"
 export PATH="$PATH:$HOME/.emacs.d/bin"
-export ANDROID_SDK_ROOT="$HOME/.android/sdk"
+export PATH=/home/thesmader/.nimble/bin:$PATH
+
+# environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
-export FLUTTER_ROOT="/home/thesmader/dev/env/flutter/"
+export ANDROID_SDK_ROOT="$HOME/.android/sdk"
+export CARGO_HOME="/home/thesmader/Installs/rust/cargo"
+export CCACHE_DIR="/home/thesmader/Installs/cache"
 export CHROME_EXECUTABLE="/usr/bin/brave"
+export DOTBARE_DIR="/home/thesmader/dotfiles"
+export DOTBARE_TREE="/home/thesmader"
+export EDITOR="nvim"
+export FLUTTER_ROOT="/home/thesmader/dev/env/flutter/"
 export GOPATH=$HOME/go
+export PATH="$PATH:$HOME/.pub-cache/global_packages"
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+export RUSTUP_HOME="/home/thesmader/Installs/rust/"
+
+# NVM
+#export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+source ~/Installs/.dotbare/dotbare.plugin.zsh
+source ~/Installs/fuchsia/scripts/fx-env.sh
 
 # Custom Aliases
-alias gst="git status" 
 #alias elaichi="cd $HOME/dev/project-elaichi/elaichi"
-#alias pegasus="cd $HOME/dev/project-pegasus/mondaymorning/"
 alias adk="echo "android" | /usr/lib/jvm/java-8-openjdk/bin/keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore | xsel -ib"
-#alias cd="cd && ls"
-alias fl="fvm flutter"
-alias q="exit"
-alias c="clear"
-alias invim="nvim $HOME/.config/nvim/init.vim"
-alias pbld="flutter pub run build_runner watch --delete-conflicting-outputs"
-alias pubg="flutter pub get"
-alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
-alias pnvim='nvim --cmd "set rtp+=$(pwd)" .'
-alias dsa="cd $HOME/dev/dsa"
-alias lf="lf-ueberzug"
-alias screenkey="screenkey -p fixed -g 50%x10%+20%-5% & disown %1"
-#alias screenkey="screenkey & disown %1"
-alias nvimcfg="cd $HOME/.config/nvim/"
 alias battery="cat /sys/class/power_supply/BAT0/capacity"
+alias c="clear"
 alias config='/usr/bin/git --git-dir=/home/thesmader/dotfiles/ --work-tree=/home/thesmader'
-#alias elx="cd /home/thesmader/dev/elixir"
+alias dsa="cd $HOME/dev/dsa"
+alias enrc="cd $HOME/.config/nvim/ && nvim ."
+alias fl="fvm flutter"
+alias gst="git status" 
+alias invim="nvim $HOME/.config/nvim/init.vim"
+alias lf="lf-ueberzug"
+alias pbld="flutter pub run build_runner watch --delete-conflicting-outputs"
+alias pnvim='nvim --cmd "set rtp+=$(pwd)" .'
+alias pubg="flutter pub get"
+alias q="exit"
+alias screenkey="screenkey -p fixed -g 50%x10%+20%-5% & disown %1"
+alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
+
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do time $shell -i -c exit; done
+}
+
+nvm() {
+    unset -f nvm
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    nvm "$@"
+}
+ 
+node() {
+    unset -f node
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    node "$@"
+}
+ 
+npm() {
+    unset -f npm
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    npm "$@"
+}
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -120,6 +163,7 @@ alias config='/usr/bin/git --git-dir=/home/thesmader/dotfiles/ --work-tree=/home
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions)
 
+
 source $ZSH/oh-my-zsh.sh
 
 bindkey -v
@@ -150,3 +194,7 @@ bindkey -s '^f' 'litmux\n'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+alias luamake=/home/thesmader/Installs/lua-language-server/3rd/luamake/luamake
+alias fld='/home/thesmader/dev/flutterdev/flutter/bin/flutter'

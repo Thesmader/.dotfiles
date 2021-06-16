@@ -1,6 +1,5 @@
 local lspconfig = require('lspconfig')
 
-require'lsp_signature'.on_attach()
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    vim.lsp.diagnostic.on_publish_diagnostics, {
      -- Enable diagnostic message updates in insert mode
@@ -29,7 +28,6 @@ dart_capabilities.textDocument.codeAction = {
 }
 
 lspconfig.dartls.setup {
-  on_attach = on_attach;
   flags = {allow_incremental_sync = true},
   init_options = {
     onlyAnalyzeProjectsWithOpenFiles = true,
@@ -38,21 +36,13 @@ lspconfig.dartls.setup {
     suggestFromUnimportedLibraries = true,
     closingLabels = true,
   },
-  capabilities = dart_capabilities;
+  capabilities = dart_capabilities
 }
 
--- Go LSP
-lspconfig.gopls.setup {
-  on_init = custom_init,
-  on_attach = custom_attach,
-  capabilities = updated_capabilities
-}
 
 -- Elixir LSP
-lspconfig.elixirls.setup{ 
-  capabilities = capabilities,
-  cmd = { "/home/thesmader/Installs/elixir-ls/release/language_server.sh" }; 
-  on_attach = on_attach,
+lspconfig.elixirls.setup{
+  cmd = { "/home/thesmader/Installs/elixir-ls/release/language_server.sh" };
   settings = {
     elixirLS = {
       dialyzerFormat = "dialyxir_long",
@@ -62,6 +52,7 @@ lspconfig.elixirls.setup{
     }
   }
 }
+
 
 -- CSS LSP
 local css_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -76,28 +67,66 @@ lspconfig.cssls.setup {
 local html_capabilities = vim.lsp.protocol.make_client_capabilities()
 html_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.html.setup {
+lspconfig.html.setup {
   capabilities = html_capabilities,
 }
 
-local chain_complete_list = {
-  default = {
-    {complete_items = {'lsp', 'snippet'}},
-    {complete_items = {'buffers'}},
-    {complete_items = {'path'}, triggered_only = {'/'}},
+--local chain_complete_list = {
+  --default = {
+    --{complete_items = {'lsp', 'snippet'}},
+    --{complete_items = {'buffers'}},
+    --{complete_items = {'path'}, triggered_only = {'/'}},
+  --},
+  --string = {
+    --{complete_items = {'path'}, triggered_only = {'/'}},
+    --{complete_items = {'buffers'}},
+  --},
+  --comment = {},
+--}
+
+--require('nlua.lsp.nvim').setup(lspconfig, {})
+
+local sumneko_root_path = '/home/thesmader/Installs/lua-language-server'
+local sumneko_binary = sumneko_root_path.."/bin/Linux/lua-language-server"
+
+require'lspconfig'.sumneko_lua.setup {
+  cmd = {sumneko_binary, "-E", sumneko_root_path.."/main.lua"};
+  filetypes = {'lua'};
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
   },
-  string = {
-    {complete_items = {'path'}, triggered_only = {'/'}},
-    {complete_items = {'buffers'}},
-  },
-  comment = {},
 }
 
 local servers = {"bashls", "clangd", "tsserver", "vimls", "gopls", "cssls", "html"}
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup { on_attach = on_attach }
+  lspconfig[lsp].setup {}
 end
 
 vim.cmd [[autocmd CursorHold * :lua vim.lsp.diagnostic.show_line_diagnostics()]]
-vim.cmd [[autocmd CursorHoldI * silent! :lua vim.lsp.buf.signature_help()]]
+--vim.cmd [[autocmd CursorHoldI * silent! :lua vim.lsp.buf.signature_help()]]
+
+-- alternatively you can override the default configs
+--require("flutter-tools").setup {
+  --flutter_path = "/home/thesmader/dev/env/flutter/bin/flutter", -- <-- this takes priority over the lookup
+--}
 

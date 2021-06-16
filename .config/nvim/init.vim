@@ -1,40 +1,40 @@
+:let g:netrw_rmdir_cmd='rm -r'
+
 set exrc
 set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
 Plug '$HOME/dev/nvim_plugs/oldfiles.vim'
 Plug '$HOME/dev/personal/ghcli'
+Plug '$HOME/dev/work/flutter-tools.nvim'
 
-Plug 'ray-x/lsp_signature.nvim'
+Plug 'tjdevries/nlua.nvim'
+Plug 'fatih/vim-go'
+Plug 'vuciv/vim-bujo'
 Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'folke/lsp-trouble.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'glepnir/galaxyline.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'alvan/vim-closetag'
 Plug 'elixir-editors/vim-elixir'
-Plug '$HOME/dev/nvim_plugs/ghcli.nvim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'sainnhe/gruvbox-material'
 Plug 'andweeb/presence.nvim'
 Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-dispatch'
-Plug 'wakatime/vim-wakatime'
 Plug 'mattn/webapi-vim'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'thosakwe/vim-flutter'
+Plug 'Neevash/awesome-flutter-snippets'
+Plug 'RobertBrunhage/flutter-riverpod-snippets'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
-Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-"Plug 'junegunn/fzf.vim'
-"Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+"Plug 'nvim-treesitter/playground'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'neovim/nvim-lspconfig'
@@ -44,10 +44,11 @@ Plug 'vim-test/vim-test'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'jiangmiao/auto-pairs'
+
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'Neevash/awesome-flutter-snippets'
-Plug 'RobertBrunhage/flutter-riverpod-snippets'
+Plug 'L3MON4D3/luasnip'
+
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -58,11 +59,12 @@ call plug#end()
 if(has("termguicolors"))
   set termguicolors
 endif
+
 " Path to the plugin configuration files written in lua.
 let g:custom_path = '~/.config/nvim/plugin/'
 
 " Remove trailing whitespaces in specified filetypes
-au FileType dart autocmd BufWritePre <buffer> %s/\s\+$//e
+"au FileType dart,lua autocmd BufWritePre <buffer> %s/\s\+$//e
 
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
 
@@ -72,11 +74,7 @@ filetype plugin indent on
 " LSP Trouble
 
 :lua << EOF
-  require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
+  require("trouble").setup {}
 EOF
 
 let g:switch_mapping = ""
@@ -85,6 +83,11 @@ nnoremap <leader>t :Switch<CR>
 nmap <M-t> <C-w>+
 nmap <M-s> <C-w>-
 
+nmap <leader>ba <Plug>BujoAddnormal
+imap <C-s> <Plug>BujoAddinsert
+
+nmap <leader>bc <Plug>BujoChecknormal
+imap <C-s> <Plug>BujoCheckinsert
 
 "Colorizer
 :lua require'colorizer'.setup()
@@ -106,6 +109,7 @@ function! WinMove(key)
   endif
 endfunction
 
+
 " Keymaps for splitting and leader keys
 imap jk <Esc>
 nnoremap <silent> <C-h> :call WinMove('h')<CR>
@@ -124,6 +128,4 @@ function! OpenUrlUnderCursor()
   endif
 endfunction
 nnoremap gx :call OpenUrlUnderCursor()<CR>
-
-
 

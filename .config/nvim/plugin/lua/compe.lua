@@ -1,6 +1,7 @@
 require'compe'.setup ({
   enabled = true,
-  debug = true,
+  debug = false,
+  preselect = 'disable',
   autocomplete = true,
   throttle_time = 80,
   source_timeout = 200,
@@ -8,12 +9,13 @@ require'compe'.setup ({
   allow_prefix_unmatch = false,
 
   source = {
-    path = true,
-    buffer = true,
+    path = {menu = '[PATH]', priority = 9},
+    buffer = {menu = '[BUF]', priority = 8},
     calc = true,
-    vsnip = true,
-    nvim_lsp = true,
-    nvim_lua = true,
+    vsnip = {menu = '[VSNP]', priority = 7},
+    nvim_lsp = {menu = '[LSP]', priority = 10, sort = false},
+    nvim_lua = {menu = '[LUA]', priority = 6},
+    luasnip = {menu = '[SNP]', priority = 10},
     spell = true,
     tags = true,
     snippets_nvim = false,
@@ -33,14 +35,21 @@ local check_back_space = function()
   end
 end
 
+local function prequire(...)
+  local status, lib = pcall(require, ...)
+  if (status) then return lib end
+  return nil
+end
+
+local luasnip = prequire 'luasnip'
+
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif
-    vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
+    return t '<C-n>'
+  elseif luasnip and luasnip.expand_or_jumpable() then
+      return t '<Plug>luasnip-expand-or-jump'
   elseif check_back_space() then
-    return t "<Tab>"
+    return t '<Tab>'
   else
     return vim.fn['compe#complete']()
   end
@@ -48,11 +57,11 @@ end
 
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
+    return t '<C-p>'
+  elseif luasnip and luasnip.expand_or_jumpable(-1) then
+    return t '<Plug>luasnip-jump-prev'
   else
-    return t "<S-Tab>"
+    return t '<S-Tab>'
   end
 end
 
