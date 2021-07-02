@@ -23,6 +23,7 @@ Plug 'alvan/vim-closetag'
 Plug 'elixir-editors/vim-elixir'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'sainnhe/gruvbox-material'
+Plug 'arzg/vim-colors-xcode'
 Plug 'andweeb/presence.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/webapi-vim'
@@ -54,6 +55,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'akinsho/nvim-toggleterm.lua'
+
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'yarn install',
+      \ 'for': ['javascript', 'typescript', 'typescriptreact', 'css', 'less', 'html', 'jsx', 'tsx',
+      \ 'json', 'svelte']}
+Plug 'leafOfTree/vim-svelte-plugin'
 call plug#end()
 
 if(has("termguicolors"))
@@ -129,3 +136,13 @@ function! OpenUrlUnderCursor()
 endfunction
 nnoremap gx :call OpenUrlUnderCursor()<CR>
 
+" html stuff
+let g:tagalong_additional_filetypes = ['tsx']
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key = ','
+autocmd FileType html,css,tsx,jsx,js,svelte EmmetInstall
+
+autocmd BufWritePre *.css,*.svelte,*.tsx,*.html,*.jsx,*.json PrettierAsync 
+nnoremap <leader>p :PrettierAsync<cr>
+
+let g:vim_svelte_plugin_use_typescript = 1

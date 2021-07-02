@@ -53,7 +53,6 @@ lspconfig.elixirls.setup{
   }
 }
 
-
 -- CSS LSP
 local css_capabilities = vim.lsp.protocol.make_client_capabilities()
 css_capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -117,7 +116,7 @@ require'lspconfig'.sumneko_lua.setup {
   },
 }
 
-local servers = {"bashls", "clangd", "tsserver", "vimls", "gopls", "cssls", "html"}
+local servers = {"bashls", "clangd", "tsserver", "vimls", "gopls", "cssls", "html", "svelte"}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {}
 end

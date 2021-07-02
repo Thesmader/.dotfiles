@@ -16,7 +16,7 @@ require'compe'.setup ({
     nvim_lsp = {menu = '[LSP]', priority = 10, sort = false},
     nvim_lua = {menu = '[LUA]', priority = 6},
     luasnip = {menu = '[SNP]', priority = 10},
-    spell = true,
+    spell = false,
     tags = true,
     snippets_nvim = false,
   },
