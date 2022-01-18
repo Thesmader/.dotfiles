@@ -1,0 +1,8 @@
+[user]
+	email = dsmarak17@gmail.com
+	name = Thesmader
+[core]
+	editor = nvim
+	excludesfile = /home/thesmader/.config/.gitignore_global
+[init]
+	defaultBranch = main
