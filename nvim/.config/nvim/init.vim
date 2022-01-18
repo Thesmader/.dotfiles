@@ -4,9 +4,10 @@ set exrc
 set ignorecase
 call plug#begin()
 " Plug '$HOME/dev/nvim_plugs/pubspec-assist.vim'
-Plug '$HOME/dev/nvim_plugs/oldfiles.vim'
+"Plug '$HOME/dev/nvim_plugs/oldfiles.vim'
 Plug '$HOME/dev/personal/ghcli'
 
+Plug 'eliasreis54/vim-bloc-plugin'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'github/copilot.vim'
