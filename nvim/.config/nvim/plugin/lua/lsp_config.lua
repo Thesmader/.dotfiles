@@ -6,7 +6,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    }
  )
 
- -- Dart LSP configuration
+ --require('flutter-tools').setup{
+   --debugger = {
+     --enabled = true,
+     --run_via_dap = true,
+     --register_configurations = function (paths)
+       --require('dap').configurations.dart = {
+       --}
+     --end
+   --}
+ --}
+
+--Dart LSP configuration
 local dart_capabilities = vim.lsp.protocol.make_client_capabilities()
 --local capablities = require('cmp_nvim_lsp').update_capabilities(dart_capabilities)
 --local dart_capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -7,9 +7,13 @@ call plug#begin()
 "Plug '$HOME/dev/nvim_plugs/oldfiles.vim'
 Plug '$HOME/dev/personal/ghcli'
 
+Plug 'elihunter173/dirbuf.nvim'
+Plug 'akinsho/flutter-tools.nvim'
+Plug 'Pocco81/DAPInstall.nvim'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'eliasreis54/vim-bloc-plugin'
-Plug 'reasonml-editor/vim-reason-plus'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'reasonml-editor/vim-reason-plus'
+"Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'github/copilot.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'tjdevries/nlua.nvim'
@@ -24,7 +28,7 @@ Plug 'AndrewRadev/tagalong.vim'
 Plug 'alvan/vim-closetag'
 Plug 'elixir-editors/vim-elixir'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'sainnhe/gruvbox-material'
+"Plug 'sainnhe/gruvbox-material'
 Plug 'andweeb/presence.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/AnsiEsc.vim'
@@ -67,8 +71,8 @@ Plug 'prettier/vim-prettier', {
       \ 'json', 'svelte'],
       \}
 Plug 'leafOfTree/vim-svelte-plugin'
-Plug 'kevinhwang91/rnvimr'
-Plug 'marko-cerovac/material.nvim'
+"Plug 'kevinhwang91/rnvimr'
+"Plug 'marko-cerovac/material.nvim'
 call plug#end()
 
 if(has("termguicolors"))
@@ -108,7 +112,13 @@ imap <C-s> <Plug>BujoCheckinsert
 :lua require'colorizer'.setup()
 
 " Statusline
-":lua require('lualine').setup{ options = { theme = require'lualine.themes.onedark', section_separators = {'', ''}, component_separators = {'|', '|'} } }
+lua << EOF
+require('lualine').setup{
+options = {
+  theme = 'catppuccin'
+  }
+}
+EOF
 
 " Easy splits with <C-dirn>
 function! WinMove(key)

@@ -30,6 +30,8 @@ ls.snippets = {
   }
 }
 
+require("luasnip.loaders.from_vscode").lazy_load({})
+
 -- In Insert
 vim.cmd([[inoremap <c-l> <cmd>lua require'luasnip'.jump(1)<CR>]])
 vim.cmd([[inoremap <c-j> <cmd>lua require'luasnip'.jump(-1)<CR>]])

@@ -14,8 +14,16 @@ let g:onedark_config = {
     \}
   \}
 
-set background=dark
-"let g:onedark_italic_comment = v:true
-"let g:onedark_toggle_style_key = '<leader>pl'
-"let g:onedark_disable_terminal_colors = v:true
-colorscheme onedark
+lua << EOF
+local catppuccin = require('catppuccin')
+
+catppuccin.setup({
+  term_colors = true,
+  styles = {
+      strings = "italic"
+    }
+})
+
+EOF
+
+colorscheme catppuccin
