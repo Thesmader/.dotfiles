@@ -1,3 +1,4 @@
+require('dapui').setup()
 local lspconfig = require('lspconfig')
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -6,7 +7,22 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    }
  )
 
- --require('flutter-tools').setup{
+ require('flutter-tools').setup{
+   dev_log = {
+     enabled = true,
+     open_cmd = "tabedit"
+   },
+   dev_tools = {
+     autostart = true
+   },
+   debugger = {
+     enabled = true,
+     run_via_dap = true,
+     register_configurations = function(_)
+       require("dap").configurations.dart = {}
+       require("dap.ext.vscode").load_launchjs()
+    end,
+   }
    --debugger = {
      --enabled = true,
      --run_via_dap = true,
@@ -15,48 +31,48 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
        --}
      --end
    --}
- --}
+ }
 
 --Dart LSP configuration
-local dart_capabilities = vim.lsp.protocol.make_client_capabilities()
+--local dart_capabilities = vim.lsp.protocol.make_client_capabilities()
 --local capablities = require('cmp_nvim_lsp').update_capabilities(dart_capabilities)
 --local dart_capabilities = vim.lsp.protocol.make_client_capabilities()
-dart_capabilities.textDocument.completion.completionItem.snippetSupport = true
-dart_capabilities.textDocument.codeAction = {
-  codeActionLiteralSupport = {
-    codeActionKind = {
-      valueSet = {
-        "",
-        "quickfix",
-        "refactor",
-        "refactor.extract",
-        "refactor.inline",
-        "refactor.rewrite",
-        "source",
-        "source.organizeImports",
-      };
-    };
-  };
-}
+--dart_capabilities.textDocument.completion.completionItem.snippetSupport = true
+--dart_capabilities.textDocument.codeAction = {
+  --codeActionLiteralSupport = {
+    --codeActionKind = {
+      --valueSet = {
+        --"",
+        --"quickfix",
+        --"refactor",
+        --"refactor.extract",
+        --"refactor.inline",
+        --"refactor.rewrite",
+        --"source",
+        --"source.organizeImports",
+      --};
+    --};
+  --};
+--}
 
-lspconfig.dartls.setup {
-  flags = {allow_incremental_sync = true},
-  init_options = {
-    onlyAnalyzeProjectsWithOpenFiles = true,
-    outline = true,
-    flutterOutline = true,
-    suggestFromUnimportedLibraries = true,
-    closingLabels = true,
-    insertArgumentPlaceHolders = true
-  },
-  capabilities = dart_capabilities,
-  settings = {
-    dart = {
-      --completeFunctionCalls = true,
-      --previewLsp = true,
-    }
-  }
-}
+--lspconfig.dartls.setup {
+  --flags = {allow_incremental_sync = true},
+  --init_options = {
+    --onlyAnalyzeProjectsWithOpenFiles = true,
+    --outline = true,
+    --flutterOutline = true,
+    --suggestFromUnimportedLibraries = true,
+    --closingLabels = true,
+    --insertArgumentPlaceHolders = true
+  --},
+  --capabilities = dart_capabilities,
+  --settings = {
+    --dart = {
+      ----completeFunctionCalls = true,
+      ----previewLsp = true,
+    --}
+  --}
+--}
 
 -- Elixir LSP
 lspconfig.elixirls.setup{

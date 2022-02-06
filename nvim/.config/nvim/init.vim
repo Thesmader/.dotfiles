@@ -1,5 +1,3 @@
-:let g:netrw_rmdir_cmd='rm -r'
-
 set exrc
 set ignorecase
 call plug#begin()
@@ -12,8 +10,6 @@ Plug 'akinsho/flutter-tools.nvim'
 Plug 'Pocco81/DAPInstall.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'eliasreis54/vim-bloc-plugin'
-"Plug 'reasonml-editor/vim-reason-plus'
-"Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'github/copilot.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'tjdevries/nlua.nvim'
@@ -27,13 +23,12 @@ Plug 'mattn/emmet-vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'alvan/vim-closetag'
 Plug 'elixir-editors/vim-elixir'
-Plug 'norcalli/nvim-colorizer.lua'
-"Plug 'sainnhe/gruvbox-material'
+Plug 'norcalli/nvim-terminal.lua'
+Plug 'chrisbra/Colorizer'
 Plug 'andweeb/presence.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
 Plug 'Neevash/awesome-flutter-snippets'
 Plug 'RobertBrunhage/flutter-riverpod-snippets'
 Plug 'preservim/nerdcommenter'
@@ -49,7 +44,6 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'vim-test/vim-test'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
-"Plug 'jiangmiao/auto-pairs'
 Plug 'windwp/nvim-autopairs'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -109,7 +103,12 @@ nmap <leader>bc <Plug>BujoChecknormal
 imap <C-s> <Plug>BujoCheckinsert
 
 "Colorizer
-:lua require'colorizer'.setup()
+":lua require'colorizer'.setup()
+
+" Nvim terminal
+:lua require'terminal'.setup()
+
+"let g:colorizer_auto_filetype='log'
 
 " Statusline
 lua << EOF
@@ -158,6 +157,7 @@ let g:tagalong_additional_filetypes = ['tsx']
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key = ','
 autocmd FileType html,css,tsx,jsx,js,svelte EmmetInstall
+autocmd FileType log ColorHighlight 
 
 autocmd BufWritePre *.css,*.svelte,*.tsx,*.html,*.jsx,*.json PrettierAsync 
 nnoremap <leader>p :PrettierAsync<cr>

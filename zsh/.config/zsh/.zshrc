@@ -1,4 +1,5 @@
 #! /bin/sh
+fpath+=(/home/thesmader/.local/share/zsh/site-functions)
 
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -9,6 +10,7 @@ unsetopt BEEP
 
 # completions
 autoload -Uz compinit
+compinit -i
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
@@ -61,7 +63,7 @@ export ANDROID_HOME="$HOME/.android/sdk"
 export ANDROID_SDK_ROOT="$HOME/.android/sdk"
 export CARGO_HOME="/home/thesmader/Installs/rust/cargo"
 export CCACHE_DIR="/home/thesmader/Installs/cache"
-export CHROME_EXECUTABLE="/usr/bin/brave"
+export CHROME_EXECUTABLE="/usr/bin/microsoft-edge-stable"
 export DOTBARE_DIR="/home/thesmader/dotfiles"
 export DOTBARE_TREE="/home/thesmader"
 export EDITOR="nvim"
