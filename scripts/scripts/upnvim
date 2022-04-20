@@ -1,0 +1,9 @@
+#!/bin/bash
+
+wd=$(pwd)
+cd /home/thesmader/installs/neovim/
+rm -r build
+git pull origin master --ff-only
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/neovim -DCMAKE_BUILD_TYPE=Release"
+make install
+cd $wd

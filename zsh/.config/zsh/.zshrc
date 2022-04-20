@@ -46,17 +46,19 @@ fi
 # Custom PATHs  
 export PATH="$PATH:$HOME/neovim/bin"
 export PATH="$PATH:$HOME/fvm/default/bin"
+# export PATH="$PATH:$HOME/dev/env/flutter/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/fvm/default/bin/cache/dart-sdk/bin"
-export PATH="$PATH:$HOME/.android/sdk/cmdline-tools/tools/bin"
-export PATH="$PATH:$HOME/.android/sdk/platform-tools"
+export PATH="$PATH:$HOME/dev/env/android/cmdline-tools/tools/bin"
+export PATH="$PATH:$HOME/dev/env/android/platform-tools"
 export PATH="$PATH:$HOME/.android/sdk/emulator"
-export PATH="$PATH:$HOME/Installs/android-studio/bin/studio.sh"
-export PATH="$PATH:$HOME/.nvm/versions/node/v16.1.0/bin"
 export PATH="$PATH:$HOME/scripts"
-export PATH="$PATH:$HOME/Installs/android-studio/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/gems"
 export PATH="$PATH:$HOME/scripts/svgcleaner-dir"
+export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+export PATH="$PATH:$HOME/installs/gitsizer/"
 
 # environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
@@ -103,8 +105,8 @@ timezsh() {
 
 bindkey -v
 bindkey -s '^f' 'litmux\n'
+bindkey "^r" history-incremental-pattern-search-backward
 
 alias luamake=/home/thesmader/Installs/lua-language-server/3rd/luamake/luamake
-alias fld='/home/thesmader/dev/flutterdev/flutter/bin/flutter'
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

@@ -1,4 +1,4 @@
-#! usr/bin/env zsh
+#! /bin/bash
 
 if [[ -z $STOW_FOLDERS]]; then
   STOW_FOLDERS="alacritty,flutter,nvim,scripts,tmux,git,picom,polybar,snippets,zsh"
