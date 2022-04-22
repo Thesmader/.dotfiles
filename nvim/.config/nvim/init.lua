@@ -1,0 +1,5 @@
+vim.g.mapleader = ','
+require'thesmader.plugins'
+require'thesmader.disable_builtin'
+require'thesmader.keymap'
+require'thesmader.lsp'
