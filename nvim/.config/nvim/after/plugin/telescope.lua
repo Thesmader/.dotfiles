@@ -5,17 +5,25 @@ require("telescope").setup({
 	defaults = {
 		file_ignore_patterns = {
 			"node_modules",
+			"yarn.lock",
+			"package-lock.json",
 		},
 	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown({}),
 		},
+		file_browser = {
+			theme = "ivy",
+			hijack_netrw = true,
+			path = "%:p:h",
+		},
 	},
 })
 
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("git_worktree")
+require("telescope").load_extension("file_browser")
 
 nmap({
 	"<leader>ff",
@@ -47,4 +55,9 @@ nmap({
 	function()
 		tb.lsp_range_code_actions()
 	end,
+})
+
+nmap({
+	"<leader>fb",
+	":Telescope file_browser<CR>",
 })

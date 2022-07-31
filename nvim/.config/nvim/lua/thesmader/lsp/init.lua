@@ -19,6 +19,8 @@ lspconfig.solidity_ls.setup({})
 
 lspconfig.gopls.setup({})
 
+lspconfig.svelte.setup({})
+
 -- lspconfig.rust_analyzer.setup{}
 require("rust-tools").setup({})
 

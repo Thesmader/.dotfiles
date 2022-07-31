@@ -1,10 +1,13 @@
 [user]
-	email = dsmarak17@gmail.com
+	email = smarak@kreateworld.in
 	name = Thesmader
 [core]
 	editor = nvim
-	excludesfile = /home/thesmader/.config/.gitignore_global
 [init]
 	defaultBranch = main
 [pull]
 	rebase = true
+[alias]
+        lpn = log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(magenta)%cn%Creset' --abbrev-commit --date=relative -n
+        pom = push origin main
+        ca = commit --amend

@@ -1,4 +1,4 @@
---local fn = vim.fn
+--local fn = vim.fnplugins
 --local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 --if fn.empty(fn.glob(install_path)) > 0 then
 --  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
@@ -16,7 +16,8 @@ return require("packer").startup({
 		use("navarasu/onedark.nvim")
 		use("nvim-telescope/telescope.nvim")
 		use("nvim-telescope/telescope-ui-select.nvim")
-		use("elihunter173/dirbuf.nvim")
+		-- use("elihunter173/dirbuf.nvim")
+		use("nvim-telescope/telescope-file-browser.nvim")
 		use({ "akinsho/flutter-tools.nvim" })
 		use("simrat39/rust-tools.nvim")
 		-- use 'fatih/vim-go'
@@ -58,21 +59,10 @@ return require("packer").startup({
 			"leafOfTree/vim-svelte-plugin",
 			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 		})
-		use({
-			"nvim-neorg/neorg",
-			after = { "nvim-treesitter", "telescope" },
-			config = function()
-				require("neorg").setup({
-					load = {
-						["core.defaults"] = {},
-					},
-				})
-			end,
-			requires = "nvim-lua/plenary.nvim",
-		})
 		use("jose-elias-alvarez/null-ls.nvim")
 		use("MunifTanjim/prettier.nvim")
 		use("/Users/mac/dev/personal/stackmap.nvim")
+		use("vimwiki/vimwiki")
 		if packer_bootstrap then
 			require("packer").sync()
 		end

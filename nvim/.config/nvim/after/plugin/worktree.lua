@@ -10,7 +10,7 @@ nmap({
 })
 
 nmap({
-	"<leader>ww",
+	"<leader>wa",
 	function()
 		require("telescope").extensions.git_worktree.git_worktrees()
 	end,
