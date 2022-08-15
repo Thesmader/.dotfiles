@@ -11,6 +11,12 @@ local _ = require("nvim-treesitter.configs").setup({
 		"html",
 		"dart",
 		"lua",
+		"svelte",
+		"css",
+		"scss",
+	},
+	matchup = {
+		enable = true,
 	},
 	highlight = {
 		enable = true,

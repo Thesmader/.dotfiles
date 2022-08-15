@@ -1,10 +1,11 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+	packer_bootstrap =
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
 
-  -- Ref: https://github.com/wbthomason/packer.nvim/issues/739#issuecomment-1019280631
-  vim.o.runtimepath = fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
+	-- Ref: https://github.com/wbthomason/packer.nvim/issues/739#issuecomment-1019280631
+	vim.o.runtimepath = fn.stdpath("data") .. "/site/pack/*/start/*," .. vim.o.runtimepath
 end
 vim.cmd([[ packadd packer.nvim]])
 
@@ -16,11 +17,9 @@ return require("packer").startup({
 		use("navarasu/onedark.nvim")
 		use("nvim-telescope/telescope.nvim")
 		use("nvim-telescope/telescope-ui-select.nvim")
-		-- use("elihunter173/dirbuf.nvim")
 		use("nvim-telescope/telescope-file-browser.nvim")
 		use({ "akinsho/flutter-tools.nvim" })
 		use("simrat39/rust-tools.nvim")
-		-- use 'fatih/vim-go'
 		use("tpope/vim-surround")
 		use({ "ThePrimeagen/harpoon", requires = { "kyazdani42/nvim-web-devicons", "nvim-lua/plenary.nvim" } })
 		use("ThePrimeagen/git-worktree.nvim")
@@ -28,12 +27,7 @@ return require("packer").startup({
 		use("folke/trouble.nvim")
 		use("Neevash/awesome-flutter-snippets")
 		use("RobertBrunhage/flutter-riverpod-snippets")
-		use({
-			"numToStr/Comment.nvim",
-			config = function()
-				require("Comment").setup()
-			end,
-		})
+		use("numToStr/Comment.nvim")
 		use("dart-lang/dart-vim-plugin")
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
@@ -54,15 +48,15 @@ return require("packer").startup({
 		use("nvim-telescope/telescope-dap.nvim")
 		use("akinsho/toggleterm.nvim")
 		use({ "eliasreis54/vim-bloc-plugin" })
-		use({ "prettier/vim-prettier", ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" } })
 		use({
 			"leafOfTree/vim-svelte-plugin",
 			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 		})
 		use("jose-elias-alvarez/null-ls.nvim")
-		use("MunifTanjim/prettier.nvim")
-		use("/Users/mac/dev/personal/stackmap.nvim")
 		use("vimwiki/vimwiki")
+		use("JoosepAlviste/nvim-ts-context-commentstring")
+		use("andymass/vim-matchup")
+		use("TimUntersberger/neogit")
 		if packer_bootstrap then
 			require("packer").sync()
 		end
