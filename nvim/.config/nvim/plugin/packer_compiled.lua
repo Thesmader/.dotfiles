@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/dart-vim-plugin",
     url = "https://github.com/dart-lang/dart-vim-plugin"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   ["flutter-riverpod-snippets"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/flutter-riverpod-snippets",

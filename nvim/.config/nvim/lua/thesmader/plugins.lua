@@ -57,6 +57,7 @@ return require("packer").startup({
 		use("JoosepAlviste/nvim-ts-context-commentstring")
 		use("andymass/vim-matchup")
 		use("TimUntersberger/neogit")
+		use("sindrets/diffview.nvim")
 		if packer_bootstrap then
 			require("packer").sync()
 		end
