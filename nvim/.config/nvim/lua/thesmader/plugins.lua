@@ -58,6 +58,18 @@ return require("packer").startup({
 		use("andymass/vim-matchup")
 		use("TimUntersberger/neogit")
 		use("sindrets/diffview.nvim")
+		use("arzg/vim-substrata")
+		use("nvim-treesitter/playground")
+		use("nvim-neotest/neotest")
+		use("antoinemadec/FixCursorHold.nvim")
+		use("sidlatau/neotest-dart")
+		use({
+			"akinsho/git-conflict.nvim",
+			tag = "*",
+			config = function()
+				require("git-conflict").setup()
+			end,
+		})
 		if packer_bootstrap then
 			require("packer").sync()
 		end

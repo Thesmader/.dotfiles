@@ -62,8 +62,7 @@ export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:$HOME/installs/gitsizer/"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export PATH="$PATH:/Users/mac/Library/Android/sdk/platform-tools"
-export PATH="$PATH:/Users/mac/Library/Android/sdk/cmdline-tools/latest/bin"
+export PATH="$PATH:$HOME/dev/env/android/platform-tools"
 export PATH="$PATH:$HOME/dev/env/rust/cargo/bin"
 
 # environment variables

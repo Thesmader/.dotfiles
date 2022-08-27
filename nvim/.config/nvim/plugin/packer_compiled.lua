@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   ["awesome-flutter-snippets"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/awesome-flutter-snippets",
@@ -114,6 +119,12 @@ _G.packer_plugins = {
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
     url = "https://github.com/akinsho/flutter-tools.nvim"
   },
+  ["git-conflict.nvim"] = {
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0" },
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/git-conflict.nvim",
+    url = "https://github.com/akinsho/git-conflict.nvim"
+  },
   ["git-worktree.nvim"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
@@ -143,6 +154,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/neogit",
     url = "https://github.com/TimUntersberger/neogit"
+  },
+  neotest = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
+  },
+  ["neotest-dart"] = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/neotest-dart",
+    url = "https://github.com/sidlatau/neotest-dart"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -214,6 +235,11 @@ _G.packer_plugins = {
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
+  playground = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
+  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/plenary.nvim",
@@ -279,6 +305,11 @@ _G.packer_plugins = {
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-matchup",
     url = "https://github.com/andymass/vim-matchup"
   },
+  ["vim-substrata"] = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-substrata",
+    url = "https://github.com/arzg/vim-substrata"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-surround",
@@ -304,14 +335,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

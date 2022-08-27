@@ -28,3 +28,6 @@ nmap({
 		vim.lsp.buf.definition()
 	end,
 })
+
+vim.cmd([[ vnoremap <M-j> :m '>+1<CR>gv=gv ]])
+vim.cmd([[ vnoremap <M-k> :m '<-2<CR>gv=gv ]])
