@@ -80,14 +80,21 @@ _G.packer_plugins = {
     url = "https://github.com/antoinemadec/FixCursorHold.nvim"
   },
   ["awesome-flutter-snippets"] = {
-    loaded = true,
-    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/awesome-flutter-snippets",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/opt/awesome-flutter-snippets",
     url = "https://github.com/Neevash/awesome-flutter-snippets"
   },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -100,8 +107,10 @@ _G.packer_plugins = {
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["dart-vim-plugin"] = {
-    loaded = true,
-    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/dart-vim-plugin",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/opt/dart-vim-plugin",
     url = "https://github.com/dart-lang/dart-vim-plugin"
   },
   ["diffview.nvim"] = {
@@ -110,8 +119,10 @@ _G.packer_plugins = {
     url = "https://github.com/sindrets/diffview.nvim"
   },
   ["flutter-riverpod-snippets"] = {
-    loaded = true,
-    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/flutter-riverpod-snippets",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/cns/.local/share/nvim/site/pack/packer/opt/flutter-riverpod-snippets",
     url = "https://github.com/RobertBrunhage/flutter-riverpod-snippets"
   },
   ["flutter-tools.nvim"] = {
@@ -290,11 +301,6 @@ _G.packer_plugins = {
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
-  ["vim-bloc-plugin"] = {
-    loaded = true,
-    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-bloc-plugin",
-    url = "https://github.com/eliasreis54/vim-bloc-plugin"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -304,11 +310,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-matchup",
     url = "https://github.com/andymass/vim-matchup"
-  },
-  ["vim-substrata"] = {
-    loaded = true,
-    path = "/Users/cns/.local/share/nvim/site/pack/packer/start/vim-substrata",
-    url = "https://github.com/arzg/vim-substrata"
   },
   ["vim-surround"] = {
     loaded = true,
@@ -343,13 +344,18 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType dart ++once lua require("packer.load")({'awesome-flutter-snippets', 'dart-vim-plugin', 'flutter-riverpod-snippets'}, { ft = "dart" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType flutter ++once lua require("packer.load")({'awesome-flutter-snippets', 'dart-vim-plugin', 'flutter-riverpod-snippets'}, { ft = "flutter" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /Users/cns/.local/share/nvim/site/pack/packer/opt/dart-vim-plugin/ftdetect/dart.vim]], true)
+vim.cmd [[source /Users/cns/.local/share/nvim/site/pack/packer/opt/dart-vim-plugin/ftdetect/dart.vim]]
+time([[Sourcing ftdetect script at: /Users/cns/.local/share/nvim/site/pack/packer/opt/dart-vim-plugin/ftdetect/dart.vim]], false)
 time([[Sourcing ftdetect script at: /Users/cns/.local/share/nvim/site/pack/packer/opt/vim-svelte-plugin/ftdetect/svelte.vim]], true)
 vim.cmd [[source /Users/cns/.local/share/nvim/site/pack/packer/opt/vim-svelte-plugin/ftdetect/svelte.vim]]
 time([[Sourcing ftdetect script at: /Users/cns/.local/share/nvim/site/pack/packer/opt/vim-svelte-plugin/ftdetect/svelte.vim]], false)

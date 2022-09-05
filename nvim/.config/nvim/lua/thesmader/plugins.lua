@@ -25,10 +25,10 @@ return require("packer").startup({
 		use("ThePrimeagen/git-worktree.nvim")
 		use("nvim-lua/popup.nvim")
 		use("folke/trouble.nvim")
-		use("Neevash/awesome-flutter-snippets")
-		use("RobertBrunhage/flutter-riverpod-snippets")
+		use({ "Neevash/awesome-flutter-snippets", ft = { "flutter", "dart" } })
+		use({ "RobertBrunhage/flutter-riverpod-snippets", ft = { "flutter", "dart" } })
 		use("numToStr/Comment.nvim")
-		use("dart-lang/dart-vim-plugin")
+		use({ "dart-lang/dart-vim-plugin", ft = { "flutter", "dart" } })
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 		use("tpope/vim-fugitive")
@@ -38,6 +38,7 @@ return require("packer").startup({
 		use("hrsh7th/cmp-nvim-lsp")
 		use("hrsh7th/cmp-buffer")
 		use("saadparwaiz1/cmp_luasnip")
+		use("hrsh7th/cmp-cmdline")
 		use("vim-test/vim-test")
 		use("L3MON4D3/luasnip")
 		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
@@ -47,7 +48,6 @@ return require("packer").startup({
 		use("theHamsta/nvim-dap-virtual-text")
 		use("nvim-telescope/telescope-dap.nvim")
 		use("akinsho/toggleterm.nvim")
-		use({ "eliasreis54/vim-bloc-plugin" })
 		use({
 			"leafOfTree/vim-svelte-plugin",
 			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
@@ -58,7 +58,6 @@ return require("packer").startup({
 		use("andymass/vim-matchup")
 		use("TimUntersberger/neogit")
 		use("sindrets/diffview.nvim")
-		use("arzg/vim-substrata")
 		use("nvim-treesitter/playground")
 		use("nvim-neotest/neotest")
 		use("antoinemadec/FixCursorHold.nvim")
