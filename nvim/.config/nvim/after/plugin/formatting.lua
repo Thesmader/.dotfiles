@@ -6,8 +6,17 @@ local sources = {
 	formatting.stylua,
 	formatting.prettierd,
 	formatting.dart_format,
+	formatting.rustfmt,
 }
 
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(client)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
+end
 null_ls.setup({
 	sources = sources,
 	on_attach = function(client, bufnr)
@@ -17,7 +26,7 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					vim.lsp.buf.format()
+					lsp_formatting(bufnr)
 				end,
 			})
 		end
@@ -26,7 +35,5 @@ null_ls.setup({
 
 nmap({
 	"<leader>f",
-	function()
-		vim.lsp.buf.format()
-	end,
+	lsp_formatting,
 })

@@ -64,6 +64,7 @@ export PATH="$PATH:$HOME/installs/gitsizer/"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:$HOME/dev/env/android/platform-tools"
 export PATH="$PATH:$HOME/dev/env/rust/cargo/bin"
+export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 
 # environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
@@ -80,6 +81,7 @@ export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export DOTFILES="$HOME/.dotfiles/"
 export RUSTUP_HOME="$HOME/dev/env/rust/"
 export CARGO_HOME="$HOME/dev/env/rust/cargo/"
+export OPEN_API_TOKEN=b0305ff48d7d0d798a18379ef161622b
 
 # Custom Aliases
 #alias elaichi="cd $HOME/dev/project-elaichi/elaichi"
