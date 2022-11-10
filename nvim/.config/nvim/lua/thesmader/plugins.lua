@@ -69,6 +69,7 @@ return require("packer").startup({
 				require("git-conflict").setup()
 			end,
 		})
+                use("folke/tokyonight.nvim")
 		if packer_bootstrap then
 			require("packer").sync()
 		end

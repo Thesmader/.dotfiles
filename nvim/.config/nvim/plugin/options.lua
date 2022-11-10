@@ -1,6 +1,6 @@
 local opt = vim.opt
 vim.notify = require("notify")
-vim.cmd([[ colorscheme onedark]])
+vim.cmd([[ colorscheme tokyonight-moon]])
 
 vim.cmd([[
   if(has('termguicolors'))

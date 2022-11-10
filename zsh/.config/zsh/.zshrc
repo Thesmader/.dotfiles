@@ -81,7 +81,7 @@ export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export DOTFILES="$HOME/.dotfiles/"
 export RUSTUP_HOME="$HOME/dev/env/rust/"
 export CARGO_HOME="$HOME/dev/env/rust/cargo/"
-export OPEN_API_TOKEN=b0305ff48d7d0d798a18379ef161622b
+export JAVA_HOME="$HOME/dev/env/jdk/openjdk-11/"
 
 # Custom Aliases
 #alias elaichi="cd $HOME/dev/project-elaichi/elaichi"
