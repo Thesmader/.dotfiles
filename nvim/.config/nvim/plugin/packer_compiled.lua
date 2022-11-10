@@ -354,12 +354,12 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascript" }, _G.packer_plugins)]]
 vim.cmd [[au FileType javascriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType flutter ++once lua require("packer.load")({'awesome-flutter-snippets', 'dart-vim-plugin', 'flutter-riverpod-snippets'}, { ft = "flutter" }, _G.packer_plugins)]]
-vim.cmd [[au FileType dart ++once lua require("packer.load")({'awesome-flutter-snippets', 'dart-vim-plugin', 'flutter-riverpod-snippets'}, { ft = "dart" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType flutter ++once lua require("packer.load")({'dart-vim-plugin', 'flutter-riverpod-snippets', 'awesome-flutter-snippets'}, { ft = "flutter" }, _G.packer_plugins)]]
+vim.cmd [[au FileType dart ++once lua require("packer.load")({'dart-vim-plugin', 'flutter-riverpod-snippets', 'awesome-flutter-snippets'}, { ft = "dart" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-svelte-plugin'}, { ft = "typescript" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

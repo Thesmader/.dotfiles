@@ -46,11 +46,11 @@ if [[ ! "$PATH" == */home/thesmader/.fzf/bin* ]]; then
   export PATH="${PATH:+${PATH}:}/home/thesmader/.fzf/bin"
 fi
 
+export GOPATH=$HOME/go
 
 # Custom PATHs  
 export PATH="$PATH:$HOME/neovim/bin"
 export PATH="$PATH:$HOME/fvm/default/bin"
-#export PATH="$PATH:$HOME/dev/env/flutter/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/fvm/default/bin/cache/dart-sdk/bin"
@@ -65,6 +65,9 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 export PATH="$PATH:$HOME/dev/env/android/platform-tools"
 export PATH="$PATH:$HOME/dev/env/rust/cargo/bin"
 export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
+export PATH="$PATH:$HOME/.pub-cache/global_packages"
+export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+export PATH="$PATH:$HOME/installs/lua-language-server/bin/"
 
 # environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
@@ -75,9 +78,6 @@ export DOTBARE_DIR="/home/thesmader/dotfiles"
 export DOTBARE_TREE="/home/thesmader"
 export EDITOR=nvim
 export FLUTTER_ROOT="/home/thesmader/fvm/default/bin"
-export GOPATH=$HOME/go
-export PATH="$PATH:$HOME/.pub-cache/global_packages"
-export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export DOTFILES="$HOME/.dotfiles/"
 export RUSTUP_HOME="$HOME/dev/env/rust/"
 export CARGO_HOME="$HOME/dev/env/rust/cargo/"

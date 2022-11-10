@@ -1,13 +1,19 @@
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap =
+local ensure_packer = function()
+	local fn = vim.fn
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
 
-	-- Ref: https://github.com/wbthomason/packer.nvim/issues/739#issuecomment-1019280631
-	vim.o.runtimepath = fn.stdpath("data") .. "/site/pack/*/start/*," .. vim.o.runtimepath
+		-- Ref: https://github.com/wbthomason/packer.nvim/issues/739#issuecomment-1019280631
+		-- Probably required on macos
+		-- vim.o.runtimepath = fn.stdpath("data") .. "/site/pack/*/start/*," .. vim.o.runtimepath
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
 end
-vim.cmd([[ packadd packer.nvim]])
+
+local packer_bootstrap = ensure_packer()
 
 return require("packer").startup({
 	function(use)
@@ -69,7 +75,7 @@ return require("packer").startup({
 				require("git-conflict").setup()
 			end,
 		})
-                use("folke/tokyonight.nvim")
+		use("folke/tokyonight.nvim")
 		if packer_bootstrap then
 			require("packer").sync()
 		end

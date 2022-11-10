@@ -1,5 +1,5 @@
 local nmap = require("thesmader.keymap").nmap
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local debugger_dir = vim.fn.stdpath("cache") .. "/dart-code"
 local debugger_path = debugger_dir .. "/out/dist/debug.js"
 vim.g.dart_style_guide = 2
