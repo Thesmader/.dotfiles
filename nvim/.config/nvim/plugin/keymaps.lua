@@ -29,5 +29,24 @@ nmap({
 	end,
 })
 
+nmap({
+	"<leader>rr",
+	function()
+		vim.lsp.buf.references()
+	end,
+})
+nmap({
+	"<leader>cn",
+	function()
+          vim.cmd([[cnext]])
+	end,
+})
+nmap({
+	"<leader>cp",
+	function()
+          vim.cmd([[cprevious]])
+	end,
+})
+
 vim.cmd([[ vnoremap <M-j> :m '>+1<CR>gv=gv ]])
 vim.cmd([[ vnoremap <M-k> :m '<-2<CR>gv=gv ]])

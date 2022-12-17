@@ -1,5 +1,5 @@
 #! /bin/sh
-fpath+=(/home/thesmader/.local/share/zsh/site-functions)
+fpath+=($HOME/.local/share/zsh/site-functions)
 
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -68,12 +68,13 @@ export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 export PATH="$PATH:$HOME/.pub-cache/global_packages"
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export PATH="$PATH:$HOME/installs/lua-language-server/bin/"
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
 export ANDROID_SDK_ROOT="$HOME/.android/sdk"
 export CCACHE_DIR="/home/thesmader/Installs/cache"
-export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 export DOTBARE_DIR="/home/thesmader/dotfiles"
 export DOTBARE_TREE="/home/thesmader"
 export EDITOR=nvim
@@ -81,7 +82,8 @@ export FLUTTER_ROOT="/home/thesmader/fvm/default/bin"
 export DOTFILES="$HOME/.dotfiles/"
 export RUSTUP_HOME="$HOME/dev/env/rust/"
 export CARGO_HOME="$HOME/dev/env/rust/cargo/"
-export JAVA_HOME="$HOME/dev/env/jdk/openjdk-11/"
+#export JAVA_HOME="/usr/libexec/java_home"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
 
 # Custom Aliases
 #alias elaichi="cd $HOME/dev/project-elaichi/elaichi"

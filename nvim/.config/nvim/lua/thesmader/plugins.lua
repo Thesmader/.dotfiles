@@ -65,7 +65,22 @@ return require("packer").startup({
 		use("TimUntersberger/neogit")
 		use("sindrets/diffview.nvim")
 		use("nvim-treesitter/playground")
-		use("nvim-neotest/neotest")
+                use("mbbill/undotree")
+                use({"nvim-neotest/neotest",
+                requires={
+                  'sidlatau/neotest-dart'
+                },
+                config = function ()
+                  require('neotest').setup({
+                    adapters = {
+                      require('neotest-dart') {
+                        command = 'fvm flutter',
+                        use_lsp = true
+                      }
+                    }
+                  })
+                end
+              })
 		use("antoinemadec/FixCursorHold.nvim")
 		use("sidlatau/neotest-dart")
 		use({
@@ -75,6 +90,12 @@ return require("packer").startup({
 				require("git-conflict").setup()
 			end,
 		})
+                use ({
+                       'lewis6991/gitsigns.nvim',
+                       config = function()
+                               require('gitsigns').setup()
+                       end,
+                })
 		use("folke/tokyonight.nvim")
 		if packer_bootstrap then
 			require("packer").sync()

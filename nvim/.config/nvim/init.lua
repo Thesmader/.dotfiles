@@ -8,3 +8,4 @@ require("thesmader.disable_builtin")
 require("thesmader.keymap")
 require("thesmader.lsp")
 require("thesmader.globals")
+
