@@ -1,6 +1,5 @@
-require("neogit").setup({
-	kind = "vsplit",
-	integrations = {
-		diffview = true,
-	},
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
+require 'gitsigns'.setup({
+  current_line_blame = true,
 })

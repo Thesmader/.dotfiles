@@ -1,5 +1,5 @@
 require 'Comment'.setup({
-  pre_hook = function(ctx)
+  --[[ pre_hook = function(ctx)
     -- Only calculate commentstring for tsx filetypes
     if vim.bo.filetype == 'typescriptreact' then
       local U = require('Comment.utils')
@@ -20,5 +20,5 @@ require 'Comment'.setup({
         location = location,
       })
     end
-  end,
+  end, ]]
 })

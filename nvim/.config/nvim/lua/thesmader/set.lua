@@ -1,17 +1,16 @@
 local opt = vim.opt
-vim.notify = require("notify")
-vim.cmd([[ colorscheme tokyonight-moon]])
+--vim.notify = require("notify")
 
+vim.cmd([[set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:↲,precedes:«,extends:»]])
 vim.cmd([[
   if(has('termguicolors'))
     set termguicolors
   endif
 ]])
-
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
-	end,
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
+  end,
 })
 
 opt.wrap = false
@@ -38,4 +37,3 @@ opt.secure = true
 opt.list = true
 opt.laststatus = 3
 opt.smartcase = true
-vim.cmd([[set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:↲,precedes:«,extends:»]])

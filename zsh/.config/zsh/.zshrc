@@ -115,7 +115,6 @@ timezsh() {
 
 bindkey -v
 bindkey -s '^f' 'tmux-sessionizer\n'
-bindkey -s '^a' 'tmux-selldash\n'
 bindkey "^r" history-incremental-pattern-search-backward
 
 alias luamake=/home/thesmader/Installs/lua-language-server/3rd/luamake/luamake
