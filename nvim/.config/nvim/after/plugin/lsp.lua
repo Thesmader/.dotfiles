@@ -1,9 +1,11 @@
 local lsp = require 'lsp-zero'
 lsp.preset('recommended')
 
+-- require 'trouble'.setup({})
+
 lsp.ensure_installed({
   'tsserver',
-  'sumneko_lua',
+  -- 'sumneko_lua',
   'rust_analyzer',
 })
 
@@ -23,6 +25,27 @@ require 'nvim-autopairs'.setup({
     map = '<leader>e',
   }
 })
+
+
+
+lsp.set_preferences({
+  sign_icons = {}
+})
+
+local opts = { buffer = bufnr, remap = false }
+vim.keymap.set("n", "<leader>vd", function() vim.lsp.buf.definition() end, opts)
+vim.keymap.set("n", "<leader>vh", function() vim.lsp.buf.hover() end, opts)
+vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
+vim.keymap.set("n", "<leader>sl", function() vim.diagnostic.open_float() end, opts)
+vim.keymap.set("n", "<leader>vn", function() vim.diagnostic.goto_next() end, opts)
+vim.keymap.set("n", "<leader>vp", function() vim.diagnostic.goto_prev() end, opts)
+vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
+vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
+vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+
+lsp.setup()
 
 local cmp = require 'cmp'
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -67,23 +90,6 @@ local cmp_config = lsp.defaults.cmp_config({
 
 cmp.setup(cmp_config)
 
-
-lsp.set_preferences({
-  sign_icons = {}
-})
-
-local opts = { buffer = bufnr, remap = false }
-vim.keymap.set("n", "<leader>vd", function() vim.lsp.buf.definition() end, opts)
-vim.keymap.set("n", "<leader>vh", function() vim.lsp.buf.hover() end, opts)
-vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
-vim.keymap.set("n", "<leader>sl", function() vim.diagnostic.open_float() end, opts)
-vim.keymap.set("n", "<leader>vn", function() vim.diagnostic.goto_next() end, opts)
-vim.keymap.set("n", "<leader>vp", function() vim.diagnostic.goto_prev() end, opts)
-vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
-vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
 cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -99,8 +105,6 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
-
-lsp.setup()
 
 local format_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 

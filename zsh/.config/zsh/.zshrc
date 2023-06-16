@@ -8,14 +8,15 @@ zle_highlight=('paste:none')
 
 unsetopt BEEP
 
+
 # completions
-[ -f $ZDOTDIR/completion/_flutter ] && fpath+="$ZDOTDIR/completion/"
-autoload -Uz compinit
-compinit -i
+# fpath+="$ZDOTDIR/completion/"
 zstyle ':completion:*' menu select
 zmodload zsh/complist
+fpath=("$ZDOTDIR/completion/" $fpath)
 
 # compinit
+autoload -Uz compinit && compinit -i
 _comp_options+=(globdots)  # Include hidden files.
 
 autoload -U up-line-or-beginning-search
@@ -38,15 +39,14 @@ zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
 
-compdef _gnu_generic flutter
+# compdef _gnu_generic flutter
 
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */home/thesmader/.fzf/bin* ]]; then
   export PATH="${PATH:+${PATH}:}/home/thesmader/.fzf/bin"
 fi
-
-export GOPATH=$HOME/go
+export GOPATH="$HOME/go"
 
 # Custom PATHs  
 export PATH="$PATH:$HOME/neovim/bin"
@@ -66,10 +66,12 @@ export PATH="$PATH:$HOME/dev/env/android/platform-tools"
 export PATH="$PATH:$HOME/dev/env/rust/cargo/bin"
 export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
 export PATH="$PATH:$HOME/.pub-cache/global_packages"
-export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 export PATH="$PATH:$HOME/installs/lua-language-server/bin/"
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$PATH:$HOME/Library/Python/3.11/bin/"
+export PATH=$PATH:$HOME/.maestro/bin
 
 # environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
@@ -120,3 +122,11 @@ bindkey "^r" history-incremental-pattern-search-backward
 alias luamake=/home/thesmader/Installs/lua-language-server/3rd/luamake/luamake
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/thesmader/dev/env/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/thesmader/dev/env/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/thesmader/dev/env/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/thesmader/dev/env/google-cloud-sdk/completion.zsh.inc'; fi
+source ~/.dart-cli-completion/zsh-config.zsh
+source ~/.config/zsh/.mf-zsh-secrets.zsh

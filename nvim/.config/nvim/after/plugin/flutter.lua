@@ -34,5 +34,8 @@ require 'flutter-tools'.setup({
       virtual_text_str = "■",
     },
     capabilities = capabilities,
+    settings = {
+      lineLength = 100,
+    }
   },
 })

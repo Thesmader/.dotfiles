@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-cmdline' },
       { 'hrsh7th/cmp-path' },
       { 'saadparwaiz1/cmp_luasnip' },
       { 'hrsh7th/cmp-nvim-lsp' },
@@ -52,10 +53,13 @@ return require('packer').startup(function(use)
   use 'nvim-neotest/neotest'
   use 'sidlatau/neotest-dart'
   use 'lewis6991/gitsigns.nvim'
-  use { 'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+  use 'nvim-lualine/lualine.nvim'
   use 'tpope/vim-surround'
+  use { 'folke/trouble.nvim',
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    }
+  }
   if packer_bootstrap then
     require('packer').sync()
   end
