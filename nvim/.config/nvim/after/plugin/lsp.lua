@@ -40,10 +40,11 @@ vim.keymap.set("n", "<leader>sl", function() vim.diagnostic.open_float() end, op
 vim.keymap.set("n", "<leader>vn", function() vim.diagnostic.goto_next() end, opts)
 vim.keymap.set("n", "<leader>vp", function() vim.diagnostic.goto_prev() end, opts)
 vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+vim.keymap.set("n", "<leader>ra", function() vim.lsp.buf.range_code_action() end, opts)
 vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
 vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
 vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
+vim.keymap.set("n", "<leader>ih", function() vim.lsp.buf.inlay_hint(0) end, opts)
 
 lsp.setup()
 

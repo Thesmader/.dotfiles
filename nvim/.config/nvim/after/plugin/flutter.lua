@@ -1,5 +1,13 @@
 local capabilities = require 'cmp_nvim_lsp'.default_capabilities()
 
+local opts = { buffer = bufnr, remap = false }
+vim.keymap.set("n", "<leader>fs", vim.cmd.FlutterRun, opts)
+vim.keymap.set("n", "<leader>fr", vim.cmd.FlutterReload, opts)
+vim.keymap.set("n", "<leader>fR", vim.cmd.FlutterRestart, opts)
+vim.keymap.set("n", "<leader>fp", vim.cmd.FlutterCopyProfilerUrl, opts)
+vim.keymap.set("n", "<leader>fc", vim.cmd.FlutterLogClear, opts)
+vim.keymap.set("n", "<leader>fq", vim.cmd.FlutterQuit, opts)
+
 require 'flutter-tools'.setup({
   debugger = {
     enabled = true,

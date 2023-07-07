@@ -1,2 +1,1 @@
-color = "tokyonight-night"
-vim.cmd.colorscheme(color)
+vim.cmd.colorscheme('catppuccin-macchiato')
