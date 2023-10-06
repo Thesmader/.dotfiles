@@ -1,4 +1,6 @@
 vim.g.mapleader = ","
-require("thesmader.packer")
+vim.g.maplocalleader = " "
+-- require("thesmader.packer")
+require("thesmader.lazy")
 require("thesmader.set")
 require("thesmader.remap")

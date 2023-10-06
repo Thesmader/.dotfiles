@@ -1,6 +1,8 @@
 local dap = require("dap")
+local dapui = require 'dapui'
 
-local debugger_path = os.getenv("HOME") .. ".local/share/nvim/mason/packages/dart-debug-adapter/extension/out/dist/debug.js"
+local debugger_path = os.getenv("HOME") ..
+    ".local/share/nvim/mason/packages/dart-debug-adapter/extension/out/dist/debug.js"
 
 dap.adapters.dart = {
   type = "executable",
@@ -19,3 +21,16 @@ dap.configurations.dart = {
     cwd = "${workspaceFolder}",
   }
 }
+
+vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+
+dapui.setup()
+
+vim.keymap.set("n", "<leader>dc", function() dap.continue() end)
+vim.keymap.set("n", "<leader>db", function() dap.toggle_breakpoint() end)
+vim.keymap.set("n", "<leader>dr", function() dap.repl.toggle() end)
+vim.keymap.set("n", "<leader>do", function() dap.step_over() end)
+vim.keymap.set("n", "<leader>di", function() dap.step_into() end)
+vim.keymap.set("n", "<leader>dO", function() dap.step_out() end)
+vim.keymap.set("n", "<leader>du", function() dapui.toggle() end)

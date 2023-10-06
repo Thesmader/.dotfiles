@@ -1,7 +1,7 @@
 local opt = vim.opt
 --vim.notify = require("notify")
 
-vim.cmd([[set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:↲,precedes:«,extends:»]])
+vim.cmd([[set listchars=tab:→\ ,nbsp:␣,trail:•,eol:↲,precedes:«,extends:»]])
 vim.cmd([[
   if(has('termguicolors'))
     set termguicolors

@@ -23,6 +23,9 @@ return require('packer').startup(function(use)
   use 'theprimeagen/harpoon'
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
+  use { 'akinsho/git-conflict.nvim', tag = '*', config = function()
+    require 'git-conflict'.setup()
+  end }
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {

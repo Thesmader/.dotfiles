@@ -1,6 +1,7 @@
 [user]
 	email = dsmarak17@gmail.com
 	name = Thesmader
+	signingkey = 05324CEB5785CB37
 [core]
 	editor = nvim
 [init]
@@ -13,3 +14,10 @@
         lpn = log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(magenta)%cn%Creset' --abbrev-commit --date=relative -n
         pom = push origin main
         ca = commit --amend
+        wl = worktree list
+[commit]
+	gpgsign = true
+[merge]
+	tool = nvimdiff
+[mergetool]
+	keepBackup = false

@@ -49,7 +49,8 @@ fi
 export GOPATH="$HOME/go"
 
 # Custom PATHs  
-export PATH="$PATH:$HOME/neovim/bin"
+export PATH=/Users/thesmader/.nimble/bin:$PATH
+export PATH="$PATH:$HOME/dev/env/installs/nvim/bin/"
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 export PATH="$PATH:$HOME/.local/bin"
@@ -72,6 +73,8 @@ export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:$HOME/Library/Python/3.11/bin/"
 export PATH=$PATH:$HOME/.maestro/bin
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="$PATH:$HOME/.bun/bin"
 
 # environment variables
 export ANDROID_HOME="$HOME/.android/sdk"
@@ -108,7 +111,8 @@ alias q="exit"
 alias screenkey="screenkey -p fixed -g 50%x10%+20%-5% & disown %1"
 alias vifmrc="nvim $HOME/.config/vifm/vifmrc"
 alias poof="systemctl poweroff"
-
+alias gcpfprod='gcloud compute ssh memorystore-portforward --zone=asia-east2-c -- -N -L 6379:10.21.68.228:6379'
+alias gcpfstg='gcloud compute ssh redis-portforward --zone=asia-east2-a -- -N -L 6379:10.40.21.20:6379'
 
 timezsh() {
   shell=${1-$SHELL}
@@ -123,6 +127,10 @@ alias luamake=/home/thesmader/Installs/lua-language-server/3rd/luamake/luamake
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
+if [[ -f ~/.dvm/scripts/dvm ]]; then
+  . ~/.dvm/scripts/dvm
+fi
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/thesmader/dev/env/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/thesmader/dev/env/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -130,3 +138,6 @@ if [ -f '/Users/thesmader/dev/env/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 if [ -f '/Users/thesmader/dev/env/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/thesmader/dev/env/google-cloud-sdk/completion.zsh.inc'; fi
 source ~/.dart-cli-completion/zsh-config.zsh
 source ~/.config/zsh/.mf-zsh-secrets.zsh
+
+# bun completions
+[ -s "/Users/thesmader/.bun/_bun" ] && source "/Users/thesmader/.bun/_bun"

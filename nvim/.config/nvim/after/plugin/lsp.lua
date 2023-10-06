@@ -1,15 +1,13 @@
 local lsp = require 'lsp-zero'
 lsp.preset('recommended')
 
--- require 'trouble'.setup({})
-
 lsp.ensure_installed({
   'tsserver',
-  -- 'sumneko_lua',
+  'lua_ls',
   'rust_analyzer',
 })
 
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
@@ -79,6 +77,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     end,
   }),
 })
+
+cmp_mappings['<Tab>'] = vim.NIL
+cmp_mappings['<S-Tab>'] = vim.NIL
 
 local cmp_config = lsp.defaults.cmp_config({
   mapping = cmp_mappings,

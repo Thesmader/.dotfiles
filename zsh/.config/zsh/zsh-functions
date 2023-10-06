@@ -13,3 +13,66 @@ function zsh_add_plugin() {
         git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
     fi
 }
+
+# pull last modified (n) screenshots
+function pulls() {
+    DEFAULT_COUNT='2'
+    COUNT="${1:-$DEFAULT_COUNT}"
+    echo "⬇️  Pulling $COUNT screenshot(s)"
+
+    # Get the list of last modified screenshots
+    local screenshots=(`adb shell ls -t /storage/emulated/0/Pictures/Screenshots/ | head -n "$COUNT"`)
+
+    if [ ${#screenshots[@]} -eq 0 ]; then
+        echo "❌ No screenshots found."
+    else
+        # Pull the screenshots from the device
+        printf "%s\n" "${screenshots[@]}" | xargs -I {} adb pull "/storage/emulated/0/Pictures/Screenshots/"{} .
+
+        spliceValue=100
+        fontSize=44
+        spacing=20
+
+        if [[ $COUNT -eq 2 ]]; then
+            # Compare and join the two screenshots
+            echo "🔍 Comparing ${screenshots[1]} with ${screenshots[2]}"
+            compare "${screenshots[1]}" "${screenshots[2]}" diff.png
+
+            # Annotate and concatenate the screenshots horizontally
+            convert \
+            \( "${screenshots[1]}" -gravity south -background white -splice 0x$spliceValue -gravity south -pointsize $fontSize -annotate +0+30 "${screenshots[1]}" \) \
+            \( -size ${spacing}x1 xc:white \) \
+            \( "${screenshots[2]}" -gravity south -background white -splice 0x$spliceValue -gravity south -pointsize $fontSize -annotate +0+30 "${screenshots[2]}" \) \
+            \( -size ${spacing}x1 xc:white \) \
+            \( "diff.png" -gravity south -background white -splice 0x$spliceValue -gravity south -pointsize $fontSize -annotate +0+30 "diff.png" \) \
+            +append -border $spacing -bordercolor white diff.png
+
+        else
+            # Join multiple screenshots
+            # Initialize the command variable
+            command="convert "
+
+            # Iterate over the image filenames
+            for filename in "${screenshots[@]}"
+            do
+                # Add the image and its filename annotation to the command
+                command+="\( \"$filename\" -gravity south -background white -splice 0x$spliceValue -gravity south -pointsize $fontSize -annotate +0+30 \"$filename\" \) "
+
+                # Add the spacing image between each image
+                command+="\( -size ${spacing}x1 xc:white \) "
+            done
+
+            # Combine the images, remove the extra spacing at the end, and add borders
+            command+="+append -border $spacing -bordercolor white diff.png"
+
+            # Execute the command
+            eval $command
+        fi
+
+        # resize	
+	sips -Z 1000 diff.png
+		
+        echo "✅ Screenshots processed successfully. Opening diff.png."
+        open diff.png
+	fi
+}
