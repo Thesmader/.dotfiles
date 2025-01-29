@@ -5,6 +5,7 @@ lsp.ensure_installed({
   'tsserver',
   'lua_ls',
   'rust_analyzer',
+  'gopls',
 })
 
 lsp.configure('lua_ls', {
@@ -15,6 +16,19 @@ lsp.configure('lua_ls', {
       }
     }
   }
+})
+
+lsp.configure('gopls', {
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      completeUnimported = true,
+      usePlaceholders = true,
+      staticcheck = true
+    },
+  },
 })
 
 require 'nvim-autopairs'.setup({

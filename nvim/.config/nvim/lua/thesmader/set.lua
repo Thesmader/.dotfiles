@@ -8,9 +8,9 @@ vim.cmd([[
   endif
 ]])
 vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
-  end,
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 100 })
+	end,
 })
 
 opt.wrap = false
@@ -37,3 +37,5 @@ opt.secure = true
 opt.list = true
 opt.laststatus = 3
 opt.smartcase = true
+opt.concealcursor = "nc"
+-- opt.conceallevel = 3

@@ -1,5 +1,6 @@
 local dap = require("dap")
 local dapui = require 'dapui'
+local dapgo = require("dap-go")
 
 local debugger_path = os.getenv("HOME") ..
     ".local/share/nvim/mason/packages/dart-debug-adapter/extension/out/dist/debug.js"
@@ -21,6 +22,8 @@ dap.configurations.dart = {
     cwd = "${workspaceFolder}",
   }
 }
+
+dapgo.setup()
 
 vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = '' })
 vim.fn.sign_define('DapBreakpointCondition', { text = '🛑', texthl = '', linehl = '', numhl = '' })

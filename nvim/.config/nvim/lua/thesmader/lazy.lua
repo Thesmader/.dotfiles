@@ -17,11 +17,15 @@ local plugins = {
     version = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  { 'catppuccin/nvim',            name = 'catppuccin' },
+  { 'catppuccin/nvim',  name = 'catppuccin' },
+  { 'rose-pine/neovim', name = 'rose-pine' },
+  'kyazdani42/nvim-web-devicons',
   'mhartington/formatter.nvim',
   'nvim-treesitter/nvim-treesitter',
+  'nvim-treesitter/nvim-treesitter-textobjects',
   'theprimeagen/harpoon',
   'mbbill/undotree',
+  'tpope/vim-abolish',
   'tpope/vim-fugitive',
   {
     'akinsho/git-conflict.nvim',
@@ -55,6 +59,7 @@ local plugins = {
   { 'akinsho/flutter-tools.nvim', ft = "dart" },
   'rcarriga/nvim-notify',
   'mfussenegger/nvim-dap',
+  { 'leoluz/nvim-dap-go',         ft = "go" },
   'rcarriga/nvim-dap-ui',
   'windwp/nvim-autopairs',
   'robertbrunhage/flutter-riverpod-snippets',
@@ -66,8 +71,14 @@ local plugins = {
   'tpope/vim-surround',
   'folke/trouble.nvim',
   'github/copilot.vim',
-  'NeogitOrg/neogit',
-  { 'stevearc/oil.nvim', config = true },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
+  },
+  { 'stevearc/oil.nvim',          config = true },
   {
     'ibhagwan/fzf-lua',
     config = function()
@@ -80,6 +91,7 @@ local plugins = {
     build = ":Neorg sync-parsers",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+      vim.opt.conceallevel = 3
       require("neorg").setup {
         load = {
           ["core.defaults"] = {},  -- Loads default behaviour
@@ -92,10 +104,12 @@ local plugins = {
               },
             },
           },
+          ["core.export"] = {},
         },
       }
     end,
-  }
+  },
+  { 'echasnovski/mini.splitjoin', version = '*', opts = {} }
 }
 
 require 'lazy'.setup(plugins)

@@ -15,5 +15,6 @@ require 'neogit'.setup({
   },
   integrations = {
     telescope = false,
+    diffview = true
   }
 })
